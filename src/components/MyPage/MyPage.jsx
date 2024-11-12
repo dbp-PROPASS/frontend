@@ -10,11 +10,13 @@ const MyPage = () => {
   return (
     <div className='myPage'>
        <MyPageMenu/>
-       <Routes>
-          <Route path="editProfile" element={<EditProfile />} />
-          <Route path="myCertificate" element={<MyCertificate />} />
-          <Route path="deleteAccount" element={<DeleteAccount />} />
-      </Routes>
+       <div className="myPageContent">
+        <Routes>
+            <Route path="editProfile" element={<EditProfile />} />
+            <Route path="myCertificate" element={<MyCertificate />} />
+            <Route path="deleteAccount" element={<DeleteAccount />} />
+        </Routes>
+       </div>
     </div>
   );
 };
