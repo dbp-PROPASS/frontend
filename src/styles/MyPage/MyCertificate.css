@@ -1,0 +1,35 @@
+.myCertificate {
+    color: #8A7968;
+}
+
+.certificateTable {
+    background-color: #ccc5be;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  table {
+    background-color: #fff;
+    border-radius: 8px;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #ececec;
+  }
+  
+  .noData {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+  }
