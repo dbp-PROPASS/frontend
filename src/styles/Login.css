@@ -1,0 +1,57 @@
+.login {
+    max-width: 400px;
+    margin: 200px auto;
+    text-align: center;
+    color: #8A7968;
+  }
+
+  .form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #e5e3e3;
+    font-size: 1rem;
+  }
+  
+  .input::placeholder {
+    opacity: 0.8;
+  }
+  
+  .input:focus {
+    outline: none;
+    border: 1px solid #bfa7a2;
+  }
+  
+  .loginSubmit button {
+    padding: 10px 40px;
+    background-color: #8A7968; /* 버튼 색상 */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: auto;
+  }
+  
+  .loginSubmit button:hover {
+    font-weight: bolder;
+  }
+  
+  hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #e5e3e3;
+  }
+  
+  .nav-at-login {
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+  }
