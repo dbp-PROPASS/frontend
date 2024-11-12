@@ -1,13 +1,12 @@
-import './App.css';
+import React from 'react';
+import Navbar from './components/Navbar'
+import AppRoutes from './routes/routes'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+      <Navbar/>
+      <AppRoutes/>
     </div>
   );
 }
