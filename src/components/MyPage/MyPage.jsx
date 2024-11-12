@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MyPageMenu from './MyPageMenu';
 import EditProfile from './EditProfile'
 import MyCertificate from './MyCertificate'
@@ -12,6 +12,7 @@ const MyPage = () => {
        <MyPageMenu/>
        <div className="myPageContent">
         <Routes>
+            <Route path="/" element={<Navigate to="editProfile" />} />
             <Route path="editProfile" element={<EditProfile />} />
             <Route path="myCertificate" element={<MyCertificate />} />
             <Route path="deleteAccount" element={<DeleteAccount />} />
