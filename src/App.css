@@ -5,6 +5,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  background-color: #f7f7f7;
 }
 
 /* 나중에 지울 코드. (화면 정중앙 배치 방법)*/
