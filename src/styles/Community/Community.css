@@ -1,0 +1,107 @@
+/* Community.css */
+
+.community {
+    font-family: Arial, sans-serif;
+    color: #6c5c5c;
+    width: 70%;
+    margin: auto;
+  }
+  
+  .title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .category-select {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .category-select select {
+    background-color: #e3e0dd;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .search-input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ccc;
+  }
+  
+  .post-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  
+  .post-table th, .post-table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .post-table th {
+    background-color: #e3e0dd;
+    font-weight: bold;
+  }
+  
+  .post-table tr {
+    cursor: pointer;
+  }
+  
+  .post-table tr:hover {
+    background-color: #eae6e3;
+  }
+  
+  .pagination {
+    text-align: center;
+    margin-top: 10px;
+    color: #6c5c5c;
+  }
+  
+  .pagination span {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination span:hover {
+    text-decoration: underline;
+  }
+  
+  .detail-view .back-button {
+    background-color: #e3e0dd;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .detail-view h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .post-content {
+    background-color: #e3e0dd;
+    padding: 15px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .comments ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .comments li {
+    margin-bottom: 5px;
+  }
+  
+  .comments li strong {
+    color: #6c5c5c;
+  }
+  
