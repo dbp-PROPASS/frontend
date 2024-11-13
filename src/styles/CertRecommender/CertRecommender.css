@@ -1,0 +1,7 @@
+.certRecommender {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 180px auto auto auto;
+}
