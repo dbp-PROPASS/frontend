@@ -4,10 +4,13 @@
   display: flex; /* 캘린더와 세부 일정 리스트를 수평으로 배치 */
   gap: 20px; /* 캘린더와 세부 일정 리스트 간의 간격 설정 */
   font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+  color: #8A7968;
+  
 }
 
 /* 캘린더 섹션 */
 .calendar {
+  padding-left: 2%;
   width: 60%; /* 캘린더의 가로폭을 컨테이너의 60%로 설정 */
   /* max-height: 700px; 캘린더 전체 높이 고정 */
   overflow: hidden; /* 내용이 넘칠 경우 스크롤을 숨김 */
@@ -15,10 +18,12 @@
 
 /* 캘린더 상단 네비게이션 (이전/다음 버튼 및 월/년도 표시) */
 .calendar-header {
+  font-size: 30px;
+  font-weight: bold;
   display: flex; /* 버튼과 텍스트를 가로로 배치 */
   justify-content: space-between; /* 버튼과 텍스트를 양쪽 끝으로 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
-  margin-bottom: 10px; /* 아래쪽 여백 설정 */
+  margin-bottom: 20px; /* 아래쪽 여백 설정 */
 }
 
 /* 캘린더 테이블 */
@@ -26,14 +31,15 @@
   width: 100%; /* 테이블이 캘린더 영역을 꽉 채우도록 설정 */
   border-collapse: collapse; /* 테두리 겹침 방지 */
   table-layout: fixed; /* 셀 너비를 일정하게 유지 */
+  border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
 }
 
 /* 요일 헤더 스타일 */
 .calendar th {
-  background-color: #f0f0f0; /* 요일 헤더의 배경색 설정 */
+  background-color: #e5d1be; /* 요일 헤더의 배경색 설정 */
   padding: 10px; /* 요일 헤더의 내부 여백 설정 */
-  border: 1px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
   text-align: center; /* 텍스트를 중앙 정렬 */
+  border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
 }
 
 /* 날짜 셀 스타일 */
@@ -41,7 +47,7 @@
   width: 14.2%; /* 7열 기준으로 균등 분할 */
   height: 140px; /* 셀 높이를 고정 */
   text-align: left; /* 텍스트를 왼쪽 정렬 */
-  border: 1px solid #8A7968; /* 셀 테두리 설정 */
+  border: 2px solid #8A7968; /* 셀 테두리 설정 */
   cursor: pointer; /* 마우스 오버 시 포인터 커서 표시 */
   position: relative; /* 날짜 번호 및 이벤트를 위치시킬 기준을 설정 */
   vertical-align: top; /* 텍스트를 상단 정렬 */
@@ -54,7 +60,7 @@
 
 /* 선택된 날짜의 스타일 */
 .calendar td.selected {
-  background-color: #7a887a; /* 선택된 셀 배경색 설정 */
+  background-color: #e5d1be; /* 선택된 셀 배경색 설정 */
   color: white; /* 선택된 셀 텍스트 색상 */
 }
 
@@ -79,8 +85,8 @@
 /* 이벤트 박스 스타일 */
 .event-box {
   padding: 4px 8px; /* 이벤트 박스 내부 여백 */
-  border-radius: 8px; /* 둥근 모서리 */
-  color: white; /* 텍스트 색상 */
+  border-radius: 12px; /* 둥근 모서리 */
+  color: black; /* 텍스트 색상 */
   font-size: 0.8rem; /* 폰트 크기 */
   text-align: center; /* 텍스트 중앙 정렬 */
 }
@@ -94,17 +100,30 @@
 
 /* 오른쪽 일정 세부사항 컨테이너 */
 .schedule-details {
+  margin: 2%;
   width: 35%; /* 오른쪽 패널의 폭을 전체의 35%로 설정 */
-  background-color: #f8f8f8; /* 배경색 설정 */
-  padding: 10px; /* 내부 여백 */
-  border-radius: 8px; /* 둥근 모서리 */
-  border: 1px solid #8A7968; /* 테두리 설정 */
+  background-color: #8A7968; /*배경색 설정*/
+  padding: 5px; /* 내부 여백 */
+  border-radius: 30px; /* 둥근 모서리 */
+  border: 2px solid #8A7968; /* 테두리 설정 */
+  color: white;
+  text-align: center;
+}
+
+.detailBox2 {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 6%;
+  height: 90%;
+  background-color: white; /* 배경색 설정 */
+  border-radius: 25px; /* 둥근 모서리 */
 }
 
 /* 일정 색상*/
 :root {
-  --marker-접수-시작: #007bff; /* 접수 시작 이벤트 배경색 */
-  --marker-접수-마감: #dc3545; /* 접수 마감 이벤트 배경색 */
-  --marker-시험일: #28a745; /* 시험일 이벤트 배경색 */
-  --marker-발표일: #ffc107; /* 발표일 이벤트 배경색 */
+  --marker-접수-시작: #9AC8FF; /* 접수 시작 이벤트 배경색 */
+  --marker-접수-마감: #FF9A9A; /* 접수 마감 이벤트 배경색 */
+  --marker-시험일: #9AFFD5; /* 시험일 이벤트 배경색 */
+  --marker-발표일: #FFFB9A; /* 발표일 이벤트 배경색 */
+  --marker-만료일: #FFBF9A; /*보유 자격증 만료일*/
 }
