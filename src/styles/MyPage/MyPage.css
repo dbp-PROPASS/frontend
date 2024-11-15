@@ -1,0 +1,13 @@
+.myPage {
+  display: flex; /* 자식 컴포넌트들을 수평 배치 */
+  gap: 3rem; /* 메뉴와 콘텐츠 간의 간격 */
+  margin: 100px 50px 50px 50px;
+}
+
+.myPageMenu {
+  width: 20%; /* 메뉴 영역 너비 설정 */
+}
+
+.myPageContent {
+  flex: 1; /* 나머지 공간을 콘텐츠 영역에 할당 */
+}

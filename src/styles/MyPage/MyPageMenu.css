@@ -1,0 +1,12 @@
+.myPageMenu {
+    color: #8A7968;
+  }
+  
+  .nav-myPageMenu li {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-myPageMenu li:hover {
+    color: #000;
+  }

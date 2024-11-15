@@ -1,0 +1,401 @@
+[
+    {
+      "id": 1,
+      "name": "SQLD",
+      "round": "1차",
+      "fee": "50,000원",
+      "field": "IT",
+      "passRate": "75%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/06/01-06/10",
+          "examDate": "2023/06/15",
+          "resultDate": "2023/06/20"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "토익",
+      "round": "2차",
+      "fee": "70,000원",
+      "field": "어학",
+      "passRate": "65%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "2차",
+          "registrationPeriod": "2023/07/01-07/10",
+          "examDate": "2023/07/15",
+          "resultDate": "2023/07/25"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "CPA",
+      "round": "3차",
+      "fee": "30,000원",
+      "field": "회계",
+      "passRate": "50%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "3차",
+          "registrationPeriod": "2023/08/01-08/10",
+          "examDate": "2023/08/15",
+          "resultDate": "2023/08/20"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "정보처리기사",
+      "round": "1차",
+      "fee": "60,000원",
+      "field": "IT",
+      "passRate": "80%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/06/15-06/25",
+          "examDate": "2023/07/01",
+          "resultDate": "2023/07/10"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "컴퓨터활용능력",
+      "round": "2차",
+      "fee": "40,000원",
+      "field": "IT",
+      "passRate": "70%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "2차",
+          "registrationPeriod": "2023/07/05-07/15",
+          "examDate": "2023/07/20",
+          "resultDate": "2023/07/30"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "한국사능력검정시험",
+      "round": "3차",
+      "fee": "20,000원",
+      "field": "인문",
+      "passRate": "60%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "3차",
+          "registrationPeriod": "2023/09/01-09/10",
+          "examDate": "2023/09/15",
+          "resultDate": "2023/09/20"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "TOEFL",
+      "round": "1차",
+      "fee": "80,000원",
+      "field": "어학",
+      "passRate": "85%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/06/01-06/10",
+          "examDate": "2023/06/20",
+          "resultDate": "2023/06/25"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "CCNA",
+      "round": "1차",
+      "fee": "90,000원",
+      "field": "IT",
+      "passRate": "55%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/05/15-05/25",
+          "examDate": "2023/06/05",
+          "resultDate": "2023/06/10"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "정보보안기사",
+      "round": "1차",
+      "fee": "100,000원",
+      "field": "IT",
+      "passRate": "70%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/07/01-07/10",
+          "examDate": "2023/07/20",
+          "resultDate": "2023/07/30"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "MOS",
+      "round": "1차",
+      "fee": "50,000원",
+      "field": "IT",
+      "passRate": "80%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/06/01-06/10",
+          "examDate": "2023/06/15",
+          "resultDate": "2023/06/20"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "한국어능력시험",
+      "round": "1차",
+      "fee": "60,000원",
+      "field": "어학",
+      "passRate": "90%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/06/10-06/20",
+          "examDate": "2023/06/25",
+          "resultDate": "2023/06/30"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "경영지도사",
+      "round": "1차",
+      "fee": "120,000원",
+      "field": "경영",
+      "passRate": "65%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/08/01-08/10",
+          "examDate": "2023/08/15",
+          "resultDate": "2023/08/20"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "물리치료사",
+      "round": "1차",
+      "fee": "150,000원",
+      "field": "의료",
+      "passRate": "75%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/08/01-08/10",
+          "examDate": "2023/08/15",
+          "resultDate": "2023/08/20"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "간호사",
+      "round": "1차",
+      "fee": "200,000원",
+      "field": "의료",
+      "passRate": "80%",
+      "year": "2023",
+      "logoUrl": null,
+      "website": null,
+      "examRounds": [
+        {
+          "round": "1차",
+          "registrationPeriod": "2023/07/01-07/10",
+          "examDate": "2023/07/20",
+          "resultDate": "2023/07/25"
+        }
+      ]
+    },
+    {
+        "id": 15,
+        "name": "공인중개사",
+        "round": "1차",
+        "fee": "100,000원",
+        "field": "부동산",
+        "passRate": "90%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/06/01-06/10",
+            "examDate": "2023/06/15",
+            "resultDate": "2023/06/20"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "name": "전기기사",
+        "round": "1차",
+        "fee": "80,000원",
+        "field": "기계",
+        "passRate": "78%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/07/01-07/10",
+            "examDate": "2023/07/15",
+            "resultDate": "2023/07/20"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "name": "소방설비기사",
+        "round": "1차",
+        "fee": "90,000원",
+        "field": "기계",
+        "passRate": "80%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/06/01-06/10",
+            "examDate": "2023/06/15",
+            "resultDate": "2023/06/20"
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "name": "정보처리산업기사",
+        "round": "1차",
+        "fee": "70,000원",
+        "field": "IT",
+        "passRate": "85%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/04/01-04/10",
+            "examDate": "2023/04/15",
+            "resultDate": "2023/04/20"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "name": "웹디자인기능사",
+        "round": "1차",
+        "fee": "60,000원",
+        "field": "디자인",
+        "passRate": "70%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/03/01-03/10",
+            "examDate": "2023/03/15",
+            "resultDate": "2023/03/20"
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "name": "UX/UI 전문가",
+        "round": "1차",
+        "fee": "110,000원",
+        "field": "디자인",
+        "passRate": "88%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/08/01-08/10",
+            "examDate": "2023/08/15",
+            "resultDate": "2023/08/20"
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "name": "데이터 분석 전문가",
+        "round": "1차",
+        "fee": "130,000원",
+        "field": "IT",
+        "passRate": "92%",
+        "year": "2023",
+        "logoUrl": null,
+        "website": null,
+        "examRounds": [
+          {
+            "round": "1차",
+            "registrationPeriod": "2023/09/01-09/10",
+            "examDate": "2023/09/15",
+            "resultDate": "2023/09/20"
+          }
+        ]
+      }
+]

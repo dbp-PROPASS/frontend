@@ -1,0 +1,136 @@
+.certificateList {
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .search-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    margin-bottom: 20px;
+  }
+  
+  .search-section input[type="text"] {
+    width: 400px;
+    padding: 10px;
+    border: 2.5px solid #ccc;
+    border-radius: 25px;
+    margin-right: 10px;
+    font-size: 1em;
+  }
+  
+  .search-section button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #8c7c6c;
+    color: #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .search-section button:hover {
+    background-color: #746659;
+  }
+  
+  .table-section {
+    border: 2.5px solid  #8c7c6c;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .table-section h2 {
+    width: 150px; /* 원하는 가로 길이로 설정 */
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #555;
+    border-bottom: 2.5px solid #8c7c6c; /* 왼쪽에 고정된 밑줄 */
+    padding-bottom: 5px;
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+  
+.table-section table {
+    width: 100%;
+    border-collapse: separate;
+    background-color: #f7f7f7;
+    margin-top: 10px;
+    border: none;
+    border-spacing: 0 6px; /* 행 간 간격 5px, 열 간 간격 0 */
+}
+
+.table-section th, .table-section td {
+    padding: 15px;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-section th:first-child{
+    border-radius: 10px 0 0 10px;
+}
+
+.table-section th:last-child,
+.table-section td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.table-section td:first-child {
+    border-top-left-radius: 10px; /* 왼쪽 상단 둥글게 */
+    border-bottom-left-radius: 10px; /* 왼쪽 하단 둥글게 */
+}
+
+.table-section th {
+    background-color:  #c5bcb4;
+    color: #333;
+    font-weight: normal;
+}
+
+.table-section td {
+    padding: 10px;
+    text-align: center;
+}
+
+.clicktr {
+    background-color: #e0e0e0;
+}
+
+.clicktr:hover {
+    background-color: #c5bcb4; /* 클릭 가능한 행에 대한 마우스 오버 시 배경색 */
+}
+  
+
+
+  .no-data {
+    color: #888;
+    font-size: 1em;
+  }
+  
+  .pagination button {
+    margin: 0 3px;
+    padding: 5px 10px;
+    background-color: #f7f7f7; /* 기본 배경색 */
+    border: none;
+    cursor: pointer;
+    transition: font-weight 0.2s; /* 볼드체 전환 효과 */
+  }
+  
+  .pagination button:hover {
+    background-color: #a89787; /* 커서를 올렸을 때 배경색 */
+    color: white; /* 커서를 올렸을 때 글자색 */
+  }
+  
+  .pagination button.bold:hover {
+    font-weight: bold; /* 커서를 올렸을 때 볼드체 추가 */
+    background-color: #f7f7f7; /* 배경색 유지 */
+    color: inherit; /* 글자색 유지 */
+  }
+  
+  .pagination button.active {
+    background-color: #8c7c6c; /* 현재 페이지 버튼의 배경색 */
+    color: white; /* 현재 페이지 버튼의 글자색 */
+  }
+  
+  
+
+  
+  

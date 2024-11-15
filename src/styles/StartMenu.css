@@ -1,0 +1,16 @@
+.startMenu {
+    display: flex;
+    flex-direction: row;
+    background-color: #f7f7f7;
+    text-align: center;
+    font-weight: bold;
+    margin: 150px auto auto auto;
+  }
+
+  .start-left {
+    width: 50%;
+  }
+
+  .start-right {
+    width: 50%;
+  }

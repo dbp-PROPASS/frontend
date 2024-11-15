@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "category": "정보처리기사",
+      "passDate": "2022-05-12",
+      "validityPeriod": "2027-05-12",
+      "remarks": "갱신 필요"
+    },
+    {
+      "id": 2,
+      "category": "산업안전기사",
+      "passDate": "2021-08-20",
+      "validityPeriod": "2026-08-20",
+      "remarks": "정상"
+    }
+  ]
+  

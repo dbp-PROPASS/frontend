@@ -1,0 +1,127 @@
+.editProfile {
+    color: #8A7968;
+}
+
+.editProfileField {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px; /* 각 필드 간격 */
+  }
+
+  .editProfileField p {
+    flex: 0 0 100px; /* 레이블 고정 너비 */
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .editProfileField input {
+    flex: 1; /* 입력 필드가 나머지 공간 차지 */
+    padding: 10px;
+    border: none;
+    background-color: #e5e3e3;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+
+  .editProfileField button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #bfbebe;
+    border-radius: 30px;
+    font-size: 1rem;
+    color: white;
+    font-weight: bolder;
+  }
+
+  .selectWrapper select {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px; /* 둥근 모서리 */
+    background-color: #e5e3e3; /* 선택 박스 배경색 */
+    font-size: 1rem;
+    color: #8A7968; /* 텍스트 색상 */
+    appearance: none; /* 기본 브라우저 스타일 제거 */
+  }
+  
+  .selectWrapper {
+    position: relative;
+  }
+  
+  .editProfileAlarm {
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  
+  .toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d6d4d4;
+    transition: 0.4s;
+    border-radius: 20px; /* 둥근 스위치 */
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #8A7968;
+    transition: 0.4s;
+    border-radius: 50%; /* 원형 핸들 */
+  }
+  
+  input:checked + .slider {
+    background-color: #8A7968; /* 활성화 상태 배경 */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(20px); /* 핸들 이동 */
+  }
+  
+  .editProfileSubmit {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* 버튼 간격 */
+  }
+
+  .editProfileSubmit button {
+    padding: 10px 40px;
+    background-color: #8A7968; /* 버튼 색상 */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .editProfileSubmit button:hover {
+    background-color: #a8937f; /* 호버 색상 */
+  }
+  
+  .editProfileSubmit button:nth-child(1) {
+    background-color: #ccc; /* 취소 버튼 색상 */
+    color: #333;
+  }

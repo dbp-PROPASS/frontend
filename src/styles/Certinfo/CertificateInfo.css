@@ -1,0 +1,218 @@
+/* 전체 container */
+.certificate-info {
+  width: 100%;
+  margin: 80px auto 0;
+}
+
+.certificate-info h2 {
+  margin-bottom: 0; /* 기본 마진 제거 */
+  margin-left: 100px;
+  padding: 0 20px 0 20px;
+  font-size: 3em;
+  color: white;
+  background-color: #8c7c6c;
+  text-align: center; /* 텍스트 중앙 정렬 */
+  display: inline-block; /* 텍스트 크기에 맞게 너비가 자동 조정 */
+  border-radius: 10px 10px 0 0;
+}
+
+/* hr 스타일 */
+.certificate-info hr {
+  border: 4px solid #8c7c6c;
+  margin-top: 0; /* hr 위쪽 마진 제거 */
+  margin-bottom: 10px; /* hr 아래쪽 마진 제거 */
+}
+
+
+/* 모든 테이블의 기본 스타일 */
+.certificate-info table {
+  width: 80%;
+  margin: auto;
+  background-color: #f7f7f7;
+}
+
+.certificate-info table td{
+  border-color: transparent; /* 테두리 색상을 투명하게 설정 */
+  border-collapse: collapse;
+}
+
+.certificate-info h3::before {
+  content: '•'; /* 글머리표 추가 */
+  color: #555; /* 글머리표 색상 설정 */
+  font-size: 24px; /* 글머리표 크기 조정 */
+  margin-right: 10px; /* 글머리표와 텍스트 사이의 간격 */
+  margin-left: 50px;
+}
+
+.certificate-info h3 {
+  font-size: 25px;
+  margin-bottom: 10px; /* h3 태그의 아래 마진을 줄여서 간격을 좁힘 */
+}
+
+/* 드롭다운 메뉴 스타일 */
+.round-dropdown {
+  padding: 8px 12px;
+  margin-left: 10px;
+  font-size: 18px; /* 옵션의 글자 크기 */
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* 드롭다운 옵션의 크기 */
+.round-dropdown option {
+  font-size: 18px; /* 옵션 글자 크기 */
+  padding: 10px; /* 옵션 간격 */
+}
+
+.certificate-info table td:first-child {
+  width: 40%;
+}
+
+.certificate-info table td {
+  width: 60%;
+  padding: 3px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.certificate-info ul {
+  list-style-type: circle;
+  padding-left: 20px;
+}
+
+.certificate-info ul > li {
+  padding: 4px 0;
+  margin-left: 90px;
+}
+
+.certificate-info ul > li ul {
+  margin-top: 2px;
+  padding-left: 25px; /* 하위 ul의 padding-left */
+}
+
+.certificate-info ul > li ul > li {
+  font-size: 14px;
+  color: #666;
+}
+
+.exam-round {
+  margin-bottom: 10px; /* 테이블을 감싸는 요소에 마진을 추가 */
+  /* background-color: blue; */
+}
+
+.exam-round-table {
+  width: 100%;
+  margin-bottom: 10px;
+  border-collapse: collapse; /* 테이블 외부 경계와 셀 간 경계가 합쳐짐 */
+  table-layout: fixed; /* 열 고정 */
+  border-radius: 5px; /* 테이블의 모서리 둥글게 */
+  overflow: hidden; /* 테이블 내용이 둥근 경계를 벗어나지 않게 처리 */
+
+}
+
+.exam-round-table th {
+  border: 2px solid #b6b6b6; /* 셀 경계 */
+  padding: 10px;
+  text-align: left;
+  background-color: rgba(140, 124, 108, 0.5); /* 50% 투명도 */
+  font-weight: bold;
+}
+
+.exam-round-table td {
+  background-color: rgba(210, 201, 201, 0.5); /* alpha 값으로 투명도 적용 */
+  border: 2px solid #b6b6b6 !important;
+}
+
+.exam-round-table th,
+.exam-round-table td {
+  width: 25%;
+}
+
+/* 링크를 div 감싸는 방식으로 네이버 페이지로 이동하도록 설정 */
+.img-link {
+  display: block;
+  text-decoration: none; /* 링크의 기본 스타일 제거 */
+  margin-bottom: 10px;
+  margin-top: -30px;
+}
+
+/* 이미지 컨테이너 */
+.img {
+  width: 70%; /* 원하는 크기 */
+  margin: 0px auto;
+  overflow: hidden;
+  border-radius: 10px; /* 둥근 모서리 */
+  background-color: rgba(210, 201, 201, 0.5); /* 50% 투명도 */
+  padding: 0px;
+}
+
+.img img {
+  width: 100%; /* 이미지 크기를 div에 맞게 조정 */
+  height: 200px;
+}
+
+/* 설명 텍스트 */
+.img-description {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 0px;
+}
+
+.img:hover .img-description {
+  color: red; /* 커서가 닿으면 빨간색으로 변경 */
+  font-weight: bold;
+}
+
+
+.bookmark {
+  font-size: 20px;
+  cursor: pointer;
+  color: #ccc; /* 빈 별은 회색 */
+  margin-left: 80px;
+}
+
+.bookmarked {
+  color: yellow; /* 클릭 후 노란 별 */
+  font-weight: bold;
+}
+
+.img-description {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.img-link {
+  text-decoration: none; /* 링크의 기본 스타일 제거 */
+}
+
+
+/* header-container를 flexbox로 설정 */
+.header-container {
+  display: flex; /* 수평으로 배치 */
+  justify-content: space-between; /* 요소들 사이에 공간을 고르게 분배 */
+  align-items: center; /* 세로 가운데 정렬 */
+  margin-bottom: 0px; /* 아래쪽 여백 추가 */
+}
+
+/* 뒤로가기 버튼 스타일 */
+.back-button {
+  font-size: 18px; /* 버튼 크기 */
+  padding: 12px 20px; /* 패딩 */
+  background-color: #8c7c6c; /* 버튼 배경색 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 220px;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.back-button:hover {
+  background-color: #7a6a5a; /* 버튼 hover 시 색상 변화 */
+}
