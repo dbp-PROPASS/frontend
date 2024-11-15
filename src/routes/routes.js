@@ -3,8 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import StartMenu from '../components/StartMenu';
 import Login from '../components/Auth/Login';
 import SignUp from '../components/Auth/SignUp';
+<<<<<<< HEAD
 import CertificateInfo from '../components/CertInfo/CertificateInfo.jsx';
 import CertificateList from '../components/CertInfo/CertificateList.jsx';
+=======
+import CertificateInfo from '../components/CertInfo/CertificateInfo';
+import CertificateList from '../components/CertInfo/CertificateList';
+>>>>>>> 9c779f46d33f88e21c64d1bcec76aabcd2e2d24f
 import CertRecommender from '../components/CertRecommender/CertRecommender'
 import Community from '../components/Community/Community'
 import CommunityPost from '../components/Community/CommunityPost'
