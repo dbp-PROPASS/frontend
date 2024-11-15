@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/Certinfo/CertificateList.css';
@@ -178,20 +177,8 @@ const CertificateList = () => {
           </button>
         )}
       </div>
-=======
-import React from 'react';
-
-const CertificateList = () => {
-  return (
-    <div className='certificateList'>
-       <h1>여기는 자격증 검색 !</h1>
->>>>>>> 9c779f46d33f88e21c64d1bcec76aabcd2e2d24f
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default CertificateList;
-=======
-export default CertificateList;
->>>>>>> 9c779f46d33f88e21c64d1bcec76aabcd2e2d24f

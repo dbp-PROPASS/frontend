@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-const ScheduleManage = () => {
-  return (
-    <div className='scheduleManage'>
-       <h1>여기는 일정관리 !</h1>
-=======
 import React, { useState, useEffect } from 'react';
 import '../../styles/Schedule/Calendar.css';
 
@@ -187,13 +179,8 @@ const ScheduleManage = () => {
         </ul>
         </div>
       </div>
->>>>>>> 9c779f46d33f88e21c64d1bcec76aabcd2e2d24f
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default ScheduleManage;
-=======
-export default ScheduleManage;
->>>>>>> 9c779f46d33f88e21c64d1bcec76aabcd2e2d24f
