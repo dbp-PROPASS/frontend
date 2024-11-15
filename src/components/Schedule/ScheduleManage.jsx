@@ -138,7 +138,7 @@ const ScheduleManage = () => {
     <div className="schedule-container">
       {/* 캘린더 섹션 */}
       <div className="calendar">
-        <div className="calendar-header">
+        <div className="calendar-header" style={{ fontSize: "30px" }}>
           <button onClick={handlePrevMonth}>◀</button> 
           <span>
             {currentYear}년 {currentMonth + 1}월 
@@ -159,7 +159,10 @@ const ScheduleManage = () => {
 
       {/* 일정 세부사항 섹션 */}
       <div className="schedule-details">
+        <div className='datailBox1'>
         <h2>{selectedDate} 일정</h2> {/* 선택된 날짜 표시 */}
+        </div>
+        <div className='detailBox2'>
         <ul>
           {(calendarData[selectedDate] || []).map((event, index) => (
             <div
@@ -170,10 +173,11 @@ const ScheduleManage = () => {
               marginBottom: '10px'
             }}
           >
-              {event.description} {/* 이벤트 설명 */}
+              {event.description}
             </div>
           ))}
         </ul>
+        </div>
       </div>
     </div>
   );
