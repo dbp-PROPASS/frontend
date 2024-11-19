@@ -1,6 +1,27 @@
 import React from 'react';
 import '../../styles/MyPage/DeleteAccount.css';
 
+const handleDelete = async () => {
+  try {
+    const email = "test@example.com"
+    const response = await fetch(
+      `http://localhost:5000/api/account/${email}`,
+      { method: "DELETE" }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert(data.message); // 회원탈퇴 성공 메시지
+    } else {
+      alert(data.message); // 실패 메시지
+    }
+  } catch (error) {
+    console.error("에러 발생:", error);
+    alert("회원탈퇴 중 오류가 발생했습니다.");
+  }
+};
+
 const DeleteAcccount = () => {
   return (
     <div className='deleteAcccount'>
@@ -16,7 +37,7 @@ const DeleteAcccount = () => {
           </div>
           <h3>회원 탈퇴 사유</h3>
           <textarea id="reason" placeholder="사유를 입력해주세요."></textarea>
-          <button className="delete-submit-button">회원탈퇴</button>
+          <button className="delete-submit-button" onClick={handleDelete}>회원탈퇴</button>
         </div>
     </div>
   );
