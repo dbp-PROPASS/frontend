@@ -53,16 +53,18 @@ const CertificateList = () => {
 
   // 다음 페이지로 이동 핸들러
   const handleNextPage = () => {
-    if (currentPage < totalPages) { // 총 페이지 수를 초과하지 않도록 확인
-      if (currentPage % 3 === 0) { // 3의 배수일 경우
-        setCurrentPage(currentPage + 1);
-      } else if (currentPage % 3 === 1) { // 1일 경우
-        setCurrentPage(currentPage + 3);
-      } else if (currentPage % 3 === 2) { // 2일 경우
-        setCurrentPage(currentPage + 2);
-      }
+    const pagesPerGroup = 3; // 한 번에 보여주는 페이지 수
+    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage); // 총 페이지 수 계산
+    const totalGroups = Math.ceil(totalPages / pagesPerGroup); // 총 그룹 수
+    const currentGroup = Math.ceil(currentPage / pagesPerGroup); // 현재 그룹 계산
+  
+    if (currentGroup < totalGroups) {
+      // 다음 그룹의 첫 번째 페이지로 이동
+      const nextGroupStartPage = currentGroup * pagesPerGroup + 1;
+      setCurrentPage(nextGroupStartPage);
     }
   };
+  
 
   // 이전 페이지로 이동 핸들러
   const handlePreviousPage = () => {
@@ -81,7 +83,14 @@ const CertificateList = () => {
   const isPreviousButtonVisible = currentPage > 3; // 현재 페이지가 3의 배수보다 클 경우
 
   // 다음 버튼의 활성화 상태를 결정하는 변수
-  const isNextButtonVisible = totalPages > 3 && currentPage + 1 < totalPages;
+  const isNextButtonVisible = () => {
+    const pagesPerGroup = 3; // 한 번에 보여주는 페이지 수
+    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage); // 총 페이지 수 계산
+    const totalGroups = Math.ceil(totalPages / pagesPerGroup); // 총 그룹 수
+    const currentGroup = Math.ceil(currentPage / pagesPerGroup); // 현재 그룹 계산
+  
+    return currentGroup < totalGroups; // 현재 그룹이 마지막 그룹보다 작을 때만 활성화
+  };
 
   // 검색어 변경 핸들러
   const handleSearchChange = (event) => {
@@ -171,10 +180,10 @@ const CertificateList = () => {
         ))}
         
         {/* 다음 페이지 버튼 */}
-        {isNextButtonVisible && (
-          <button className="bold" onClick={handleNextPage}>
-            &gt;&gt;
-          </button>
+        {isNextButtonVisible() && ( // 수정: 조건이 false인 경우 버튼 자체가 DOM에 렌더링되지 않음
+        <button className="bold" onClick={handleNextPage}>
+          &gt;&gt;
+        </button>
         )}
       </div>
     </div>

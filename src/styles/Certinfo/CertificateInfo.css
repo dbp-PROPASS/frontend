@@ -108,20 +108,20 @@
   table-layout: fixed; /* 열 고정 */
   border-radius: 5px; /* 테이블의 모서리 둥글게 */
   overflow: hidden; /* 테이블 내용이 둥근 경계를 벗어나지 않게 처리 */
-
 }
 
 .exam-round-table th {
-  border: 2px solid #b6b6b6; /* 셀 경계 */
   padding: 10px;
   text-align: left;
-  background-color: rgba(140, 124, 108, 0.5); /* 50% 투명도 */
+  background-color: rgba(210, 201, 201, 0.5); /* 50% 투명도 */
   font-weight: bold;
+  text-align: center;
 }
 
 .exam-round-table td {
   background-color: rgba(210, 201, 201, 0.5); /* alpha 값으로 투명도 적용 */
-  border: 2px solid #b6b6b6 !important;
+  border: 1px solid #b6b6b6 !important;
+  text-align: center !important;
 }
 
 .exam-round-table th,
@@ -134,7 +134,7 @@
   display: block;
   text-decoration: none; /* 링크의 기본 스타일 제거 */
   margin-bottom: 10px;
-  margin-top: -30px;
+  margin-top: 10px;
 }
 
 /* 이미지 컨테이너 */
@@ -144,7 +144,7 @@
   overflow: hidden;
   border-radius: 10px; /* 둥근 모서리 */
   background-color: rgba(210, 201, 201, 0.5); /* 50% 투명도 */
-  padding: 0px;
+  padding: 15px;
 }
 
 .img img {
@@ -157,7 +157,6 @@
   text-align: center;
   font-size: 14px;
   color: #333;
-  margin-top: 0px;
 }
 
 .img:hover .img-description {
@@ -169,14 +168,23 @@
 .bookmark {
   font-size: 20px;
   cursor: pointer;
-  color: #ccc; /* 빈 별은 회색 */
+  color: #4e4e4e; /* 빈 별은 회색 */
   margin-left: 80px;
+  margin-top: 20px;
+  background-color: rgba(210, 201, 201, 0.5); /* 배경색에 투명도 적용 */
+  width: 42%;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .bookmarked {
-  color: yellow; /* 클릭 후 노란 별 */
+  color: rgba(255, 255, 0, 0.919) !important;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.459);
   font-weight: bold;
+  background-color: rgba(140, 124, 108, 0.5); /* 배경색에 투명도 50% 적용 */
 }
+
+
 
 .img-description {
   margin-top: 5px;
@@ -187,32 +195,4 @@
 
 .img-link {
   text-decoration: none; /* 링크의 기본 스타일 제거 */
-}
-
-
-/* header-container를 flexbox로 설정 */
-.header-container {
-  display: flex; /* 수평으로 배치 */
-  justify-content: space-between; /* 요소들 사이에 공간을 고르게 분배 */
-  align-items: center; /* 세로 가운데 정렬 */
-  margin-bottom: 0px; /* 아래쪽 여백 추가 */
-}
-
-/* 뒤로가기 버튼 스타일 */
-.back-button {
-  font-size: 18px; /* 버튼 크기 */
-  padding: 12px 20px; /* 패딩 */
-  background-color: #8c7c6c; /* 버튼 배경색 */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin-right: 220px;
-  margin-bottom: 0px;
-  margin-top: 40px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.back-button:hover {
-  background-color: #7a6a5a; /* 버튼 hover 시 색상 변화 */
 }
