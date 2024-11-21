@@ -11,6 +11,8 @@ const MyCertificate = () => {
     remarks: '',
   });
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 창 상태
+  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  const [currentId, setCurrentId] = useState(null); // 수정하려는 자격증 ID
 
   // JSON 파일에서 데이터 로드
   useEffect(() => {
@@ -39,11 +41,34 @@ const MyCertificate = () => {
     setIsModalOpen(false); // 모달 닫기
   };
 
+  // 수정된 항목 저장 함수
+  const handleUpdateCertificate = () => {
+    if (!newCertificate.category || !newCertificate.passDate || !newCertificate.validityPeriod) {
+      alert('모든 필드를 입력하세요!');
+      return;
+    }
+
+    setCertificates(certificates.map((certificate) =>
+      certificate.id === currentId ? { ...certificate, ...newCertificate } : certificate
+    ));
+    setNewCertificate({ category: '', passDate: '', validityPeriod: '', remarks: '' }); // 입력 초기화
+    setIsModalOpen(false); // 모달 닫기
+    setEditMode(false); // 수정 모드 종료
+  };
+     
   // 선택 삭제 함수
   const handleDeleteSelected = () => {
     const checkboxes = document.querySelectorAll('.certificateCheckbox:checked');
     const idsToDelete = Array.from(checkboxes).map((checkbox) => Number(checkbox.value));
     setCertificates(certificates.filter((certificate) => !idsToDelete.includes(certificate.id)));
+  };
+
+  // 수정 버튼 클릭 시 모달 열기
+  const handleEditClick = (certificate) => {
+    setCurrentId(certificate.id); // 수정할 항목의 ID 저장
+    setNewCertificate(certificate); // 모달에 수정할 데이터 채우기
+    setIsModalOpen(true); // 모달 열기
+    setEditMode(true); // 수정 모드 활성화
   };
 
   // 데이터 없을 때 출력할 메시지
@@ -83,7 +108,7 @@ const MyCertificate = () => {
                   <td>{certificate.validityPeriod}</td>
                   <td>{certificate.remarks}</td>
                   <td>
-                    <button>변경</button>
+                    <button onClick={() => handleEditClick(certificate)}>수정</button>
                   </td>
                 </tr>
               ))
@@ -97,8 +122,14 @@ const MyCertificate = () => {
       </div>
 
       <div className='buttonForMyCertificate'>
-        <button onClick={() => setIsModalOpen(true)} className="addButton">+ 자격증 추가</button>
+        {/* 자격증 추가 버튼 */}
+        <button onClick={() => {
+          setIsModalOpen(true);
+          setEditMode(false); // 추가 모드로 설정
+          setNewCertificate({ category: '', passDate: '', validityPeriod: '', remarks: '' }); // 초기화
+        }} className="addButton">자격증 추가</button>
 
+        {/* 선택 삭제 */}
         {certificates.length > 0 && (
           <button onClick={handleDeleteSelected} className="deleteButton">선택 삭제</button>
         )}
@@ -108,7 +139,7 @@ const MyCertificate = () => {
       {isModalOpen && (
         <div className="modal">
           <div className="modalContent">
-            <h3>새 자격증 추가</h3>
+            <h3>{editMode ? '자격증 수정' : '새 자격증 추가'}</h3>
             <input
               type="text"
               placeholder="종목/등급"
@@ -134,7 +165,12 @@ const MyCertificate = () => {
               onChange={(e) => setNewCertificate({ ...newCertificate, remarks: e.target.value })}
             />
             <div className="modalButtons">
-              <button onClick={handleAddCertificate}>추가</button>
+              {/* 수정 버튼 */}
+              {editMode ? (
+                <button onClick={handleUpdateCertificate}>수정</button>
+              ) : (
+                <button onClick={handleAddCertificate}>추가</button>
+              )}
               <button onClick={() => setIsModalOpen(false)}>취소</button>
             </div>
           </div>
