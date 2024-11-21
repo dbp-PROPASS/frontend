@@ -61,6 +61,10 @@
     align-items: center;
     gap: 20px;
   }
+
+  .signUpAlarm p {
+    white-space: nowrap;
+  }
   
   .toggleSwitch {
     position: relative;
