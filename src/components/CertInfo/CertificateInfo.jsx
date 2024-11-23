@@ -32,13 +32,13 @@ const CertificateInfo = () => {
         <tbody>
           <tr>
             <td rowSpan="3">
-              
+            <a href="https://www.naver.com" target="_blank" className="img-link">
                 <div className="img">
                   <img src="https://cdn-icons-png.flaticon.com/512/5435/5435077.png" alt="description" />
                   <p className="img-description">▲ 사이트 바로가기</p>
-                  <a href="https://www.naver.com" target="_blank" className="img-link"></a>
+                  
                 </div>
-             
+            </a>
               <div
                 className={`bookmark ${isBookmarked ? 'bookmarked' : ''}`}
                 onClick={toggleBookmark}
