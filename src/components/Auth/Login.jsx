@@ -9,6 +9,10 @@ const Login = () => {
       navigate('/SignUp');
   }
 
+  const handleClickforFindPassword = () => {
+    navigate('/FindPassword');
+}
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -53,7 +57,7 @@ const Login = () => {
         <div className='nav-at-login'>
             <div className="nav-signup" onClick={handleClickforSignup}>회원가입</div>
             <div>이메일 찾기</div>
-            <div>비밀번호 찾기</div>
+            <div className="nav-find-password" onClick={handleClickforFindPassword}>비밀번호 찾기</div>
         </div>
     </div>
   );
