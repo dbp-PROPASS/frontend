@@ -14,39 +14,31 @@ const CertificateInfo = () => {
     return <div>자격증 정보가 없습니다.</div>;
   }
 
-  // 시험 차수 변경 시 처리
-  const handleRoundChange = (e) => {
-    setSelectedRound(e.target.value);
-  };
 
   // 즐겨찾기 상태 토글 처리
   const toggleBookmark = () => {
     setIsBookmarked((prev) => !prev);
   };
 
-  // 뒤로가기 버튼 클릭 시 certificateList 페이지로 이동
-  const handleBackClick = () => {
-    navigate('/certificateList'); // certificateList 페이지로 이동
-  };
+
 
   return (
     <div className="certificate-info">
       <div className="header-container">
         <h2>{certificate.name}</h2>
-        {/* 뒤로가기 버튼 */}
-        <button onClick={handleBackClick} className="back-button">뒤로가기</button>
       </div>
       <hr />
       <table className="totaltable">
         <tbody>
           <tr>
             <td rowSpan="3">
-              <a href="https://www.naver.com" target="_blank" className="img-link">
+            <a href="https://www.naver.com" target="_blank" className="img-link">
                 <div className="img">
                   <img src="https://cdn-icons-png.flaticon.com/512/5435/5435077.png" alt="description" />
                   <p className="img-description">▲ 사이트 바로가기</p>
+                  
                 </div>
-              </a>
+            </a>
               <div
                 className={`bookmark ${isBookmarked ? 'bookmarked' : ''}`}
                 onClick={toggleBookmark}
@@ -57,13 +49,7 @@ const CertificateInfo = () => {
             <td>
               <h3>
                 시험 차수
-                <select className="round-dropdown" value={selectedRound} onChange={handleRoundChange}>
-                  {certificate.examRounds.map((round, index) => (
-                    <option key={index} value={round.round}>
-                      {round.round}
-                    </option>
-                  ))}
-                </select>
+                
               </h3>
               {certificate.examRounds
                 .filter((round) => round.round === selectedRound)

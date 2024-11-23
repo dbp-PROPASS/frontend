@@ -59,7 +59,11 @@
     margin-left: auto;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+  }
+
+  .signUpAlarm p {
+    white-space: nowrap;
   }
   
   .toggleSwitch {
