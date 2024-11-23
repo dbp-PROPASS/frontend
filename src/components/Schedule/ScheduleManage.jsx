@@ -126,7 +126,7 @@ const ScheduleManage = () => {
     }
 
     // 마지막 주의 남은 빈 셀 추가
-    while (week.length < 7) {
+    while (week.length < 7 && week.length > 0) {
       week.push(<td key={`empty-end-${week.length}`}>&nbsp;</td>);
     }
     calendar.push(<tr key="last-week">{week}</tr>); // 마지막 주 추가

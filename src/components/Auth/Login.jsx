@@ -4,14 +4,14 @@ import '../../styles/Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
-
+  
   const handleClickforSignup = () => {
       navigate('/SignUp');
   }
 
   const handleClickforFindPassword = () => {
     navigate('/FindPassword');
-}
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,4 +63,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login; 
