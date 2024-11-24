@@ -18,6 +18,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cookies, setCookie] = useCookies(["rememberEmail"]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (cookies.rememberEmail !== undefined) {
@@ -35,15 +36,15 @@ const Login = () => {
     );
 
       if (response.data.success) {
-        alert("로그인 성공!");
+        alert(`${response.data.message}`);
         setCookie("rememberEmail", email, { path: '/', expires: new Date(Date.now() + 604800000) });
-        navigate("/");
+        navigate("/")
       } else {
-        alert("로그인 실패: " + response.data.message);
+        setMessage(response.data.message);
       }
     } catch (error) {
       console.error("네트워크 오류 발생:", error);
-      alert("로그인 중 오류가 발생했습니다.");
+      setMessage("로그인 중 오류가 발생했습니다.");
     }
   };
 
@@ -73,6 +74,7 @@ const Login = () => {
           <button type="submit" onClick={handleLogin}>login</button>
         </div>
       </form>
+      {message && <p className="loginMessage">{message}</p>}
       <hr />
       <div className="nav-at-login">
         <div className="nav-signup" onClick={handleClickforSignup}>회원가입</div>
