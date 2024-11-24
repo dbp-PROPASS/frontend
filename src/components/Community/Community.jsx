@@ -50,7 +50,7 @@ const Community = () => {
           <option value="english">영어 분야</option>
           <option value="finance">금융 분야</option>
         </select>
-
+  
         <input
           type="text"
           placeholder="검색할 내용을 입력해주세요."
@@ -59,6 +59,7 @@ const Community = () => {
           className="search-input"
         />
       </div>
+  
       <table className="post-table">
         <thead>
           <tr>
@@ -69,7 +70,7 @@ const Community = () => {
         <tbody>
           {paginatedPosts
             .filter((post) =>
-              post.title.toLowerCase().includes(searchTerm.toLowerCase())
+              post.title && post.title.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .map((post) => (
               <tr key={post.postId} onClick={() => setView(post.postId)}>
@@ -79,6 +80,7 @@ const Community = () => {
             ))}
         </tbody>
       </table>
+  
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <span
@@ -92,6 +94,7 @@ const Community = () => {
       </div>
     </div>
   );
+  
 
   // 상세 화면 렌더링
   const renderDetailView = () => {
