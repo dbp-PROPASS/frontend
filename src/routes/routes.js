@@ -11,7 +11,7 @@ import CommunityPost from '../components/Community/CommunityPost'
 import MyPage from '../components/MyPage/MyPage'
 import ScheduleManage from '../components/Schedule/ScheduleManage'
 
-const AppRoutes = () => {
+const AppRoutes = ({ data }) => { 
     return (
         <Routes>
             <Route path="/" element={<StartMenu />} />
