@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../styles/Schedule/Calendar.css';
 
 /* 예시 일정 데이터 */
-const calendarData = {
-  '2024-09-13': [{ type: '시험일', description: '정보처리기사 시험일' }],
-  '2024-09-23': [
-    { type: '접수 시작', description: 'SQLD 접수 시작' },
-    { type: '시험일', description: '정보처리기사 시험일' },
-  ],
-  '2024-09-29': [
-    { type: '접수 시작', description: 'ADP 접수 시작' },
-    { type: '시험일', description: '정보처리기사 시험일' },
-    { type: '발표일', description: 'SQLD 발표일' },
-    { type: '발표일', description: 'SQLD 발표일' },
-    { type: '발표일', description: 'SQLD 발표일' }
-  ],
-  '2024-09-30': [{ type: '접수 마감', description: 'ADP 접수 마감' }],
-};
+// const calendarData = {
+//   '2024-09-13': [{ type: '시험일', description: '정보처리기사 시험일' }],
+//   '2024-09-23': [
+//     { type: '접수 시작', description: 'SQLD 접수 시작' },
+//     { type: '시험일', description: '정보처리기사 시험일' },
+//   ],
+//   '2024-09-29': [
+//     { type: '접수 시작', description: 'ADP 접수 시작' },
+//     { type: '시험일', description: '정보처리기사 시험일' },
+//     { type: '발표일', description: 'SQLD 발표일' },
+//     { type: '발표일', description: 'SQLD 발표일' },
+//     { type: '발표일', description: 'SQLD 발표일' }
+//   ],
+//   '2024-09-30': [{ type: '접수 마감', description: 'ADP 접수 마감' }],
+// };
 
 const ScheduleManage = () => {
   // 오늘 날짜를 기준으로 초기 상태 설정
@@ -29,9 +30,39 @@ const ScheduleManage = () => {
       .toString()
       .padStart(2, '0')}`
   ); // 선택된 날짜, 기본값은 오늘 날짜
+  const [calendarData, setCalendarData] = useState({}); // 일정 데이터
 
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토']; // 요일 배열
 
+  // 백엔드에서 일정 데이터를 가져오는 함수
+  useEffect(() => {
+    const fetchScheduleData = async () => {
+      try {
+        const response = await axios.post('http://localhost:5000/api/schedule', {}, { withCredentials: true });
+        const data = response.data;
+
+        // 데이터 형식 변환
+        const formattedData = {};
+        data.forEach((item) => {
+          const date = item.date.split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
+          if (!formattedData[date]) {
+            formattedData[date] = [];
+          }
+          formattedData[date].push({
+            type: item.type,
+            description: item.certName,
+          });
+        });
+
+        setCalendarData(formattedData);
+      } catch (error) {
+        console.error('데이터를 불러오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchScheduleData();
+  }, []);
+  
   // 특정 연도와 월의 일 수를 계산하는 함수
   const getDaysInMonth = (year, month) => {
     const date = new Date(year, month + 1, 0); // 해당 월의 마지막 날짜

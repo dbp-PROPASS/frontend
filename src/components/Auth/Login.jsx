@@ -30,7 +30,9 @@ const Login = () => {
       const response = await axios.post("http://localhost:5000/api/auth/login", {
         email,
         password,
-      });
+      }, 
+      { withCredentials: true }
+    );
 
       if (response.data.success) {
         alert("로그인 성공!");
