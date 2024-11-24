@@ -9,11 +9,17 @@ const CertificateList = ({ certificateData }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
+ 
   useEffect(() => {
+    if (certificateData && certificateData.length > 0) {
+      console.log('데이터가 정상적으로 로드됨:', certificateData);
+    } else {
+      console.log('데이터가 로드되지 않음');
+    }
     if (certificateData && Array.isArray(certificateData)) {
       setCertificates(certificateData); // props로 받은 데이터로 업데이트
     } else {
-      fetch('http://localhost:5000/api/certificate')
+      fetch('http://localhost:5000/api/certificate')  
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -32,13 +38,14 @@ const CertificateList = ({ certificateData }) => {
         });
     }
   }, [certificateData]);
+  
 
   const indexOfLastCertificate = currentPage * certificatesPerPage;
   const indexOfFirstCertificate = indexOfLastCertificate - certificatesPerPage;
 
   // 검색어에 따라 필터링된 자격증 목록
   const filteredCertificates = certificates.filter(cert =>
-    cert.CERT_NAME && cert.CERT_NAME.toLowerCase().includes(searchTerm.toLowerCase())
+    cert.CERT_NAME && cert.CERT_NAME.toLowerCase().includes(searchTerm.toLowerCase()) // name이 없을 경우 처리
   );
 
   const currentCertificates = filteredCertificates.slice(indexOfFirstCertificate, indexOfLastCertificate);
@@ -64,15 +71,38 @@ const CertificateList = ({ certificateData }) => {
   };
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+    const pagesPerGroup = 3;
+    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage);
+    const totalGroups = Math.ceil(totalPages / pagesPerGroup);
+    const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+
+    if (currentGroup < totalGroups) {
+      const nextGroupStartPage = currentGroup * pagesPerGroup + 1;
+      setCurrentPage(nextGroupStartPage);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      if (currentPage % 3 === 0) {
+        setCurrentPage(currentPage - 3);
+      } else if (currentPage % 3 === 1) {
+        setCurrentPage(currentPage - 1);
+      } else if (currentPage % 3 === 2) {
+        setCurrentPage(currentPage - 2);
+      }
     }
+  };
+
+  const isPreviousButtonVisible = currentPage > 3;
+
+  const isNextButtonVisible = () => {
+    const pagesPerGroup = 3;
+    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage);
+    const totalGroups = Math.ceil(totalPages / pagesPerGroup);
+    const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+
+    return currentGroup < totalGroups;
   };
 
   const handleSearchChange = (event) => {
@@ -124,13 +154,15 @@ const CertificateList = ({ certificateData }) => {
                   key={index}
                   className="clicktr"
                   onClick={() => {
-                    navigate('/certificateInfo', { state: { certificate: cert } });
+                    console.log("전달 전체 값", cert); // `cert` 전체 값 확인
+                    navigate('/certificateInfo', { state: { certificate: cert } }); // ID만 전달
                   }}
                 >
                   <td>{cert.CERT_NAME}</td>
                   <td>{cert.ROUND_ID}</td>
                   <td>{cert.FEE}</td>
-                  <td>{cert.CATEGORY}</td>
+                  <td>{cert.CATEGORY}</td>  
+                                  
                 </tr>
               ))
             ) : (
@@ -144,8 +176,10 @@ const CertificateList = ({ certificateData }) => {
 
       {/* 페이지 네비게이션 */}
       <div className="pagination">
-        {currentPage > 1 && (
-          <button onClick={handlePreviousPage}>{"<<"}</button>
+        {isPreviousButtonVisible && (
+          <button className="bold" onClick={handlePreviousPage}>
+            &lt;&lt;
+          </button>
         )}
 
         {getPaginationRange().map(pageNumber => (
@@ -157,9 +191,11 @@ const CertificateList = ({ certificateData }) => {
             {pageNumber}
           </button>
         ))}
-
-        {currentPage < totalPages && (
-          <button onClick={handleNextPage}>{">>"}</button>
+        
+        {isNextButtonVisible() && (
+          <button className="bold" onClick={handleNextPage}>
+            &gt;&gt;
+          </button>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ import Community from '../components/Community/Community'
 import CommunityPost from '../components/Community/CommunityPost'
 import MyPage from '../components/MyPage/MyPage'
 import ScheduleManage from '../components/Schedule/ScheduleManage'
+import FindPassword from '../components/Auth/FindPassword';
 
 const AppRoutes = ({ data }) => { 
     return (
@@ -24,6 +25,7 @@ const AppRoutes = ({ data }) => {
             <Route path="/communityPost" element={<CommunityPost />} />
             <Route path="/mypage/*" element={<MyPage />} />
             <Route path="/scheduleManage" element={<ScheduleManage />} />
+            <Route path="/FindPassword" element={<FindPassword />} />
         </Routes>
     );
 };
