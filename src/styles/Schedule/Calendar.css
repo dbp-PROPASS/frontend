@@ -5,7 +5,6 @@
   gap: 20px; /* 캘린더와 세부 일정 리스트 간의 간격 설정 */
   font-family: Arial, sans-serif; /* 기본 폰트 설정 */
   color: #8A7968;
-  
 }
 
 /* 캘린더 섹션 */
@@ -23,7 +22,7 @@
   display: flex; /* 버튼과 텍스트를 가로로 배치 */
   justify-content: space-between; /* 버튼과 텍스트를 양쪽 끝으로 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
-  margin-bottom: 20px; /* 아래쪽 여백 설정 */
+  margin-bottom: 10px; /* 아래쪽 여백 설정 */
 }
 
 /* 캘린더 테이블 */
@@ -37,7 +36,7 @@
 /* 요일 헤더 스타일 */
 .calendar th {
   background-color: #e5d1be; /* 요일 헤더의 배경색 설정 */
-  padding: 10px; /* 요일 헤더의 내부 여백 설정 */
+  padding: 8px; /* 요일 헤더의 내부 여백 설정 */
   text-align: center; /* 텍스트를 중앙 정렬 */
   border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
 }
@@ -45,7 +44,7 @@
 /* 날짜 셀 스타일 */
 .calendar td {
   width: 14.2%; /* 7열 기준으로 균등 분할 */
-  height: 140px; /* 셀 높이를 고정 */
+  /* height: 120px; 셀 높이를 고정 */
   text-align: left; /* 텍스트를 왼쪽 정렬 */
   border: 2px solid #8A7968; /* 셀 테두리 설정 */
   cursor: pointer; /* 마우스 오버 시 포인터 커서 표시 */
@@ -57,6 +56,7 @@
 .calendar td.has-event {
   background-color: #f5f5f5; /* 이벤트가 있는 셀에 배경색 추가 */
 }
+
 
 /* 선택된 날짜의 스타일 */
 .calendar td.selected {
@@ -100,8 +100,10 @@
 
 /* 오른쪽 일정 세부사항 컨테이너 */
 .schedule-details {
-  margin: 2%;
-  width: 35%; /* 오른쪽 패널의 폭을 전체의 35%로 설정 */
+  margin-top: 10px;
+  margin-left: 1%;
+  width: 36%; /* 오른쪽 패널의 폭을 전체의 35%로 설정 */
+  height: 670px;
   background-color: #8A7968; /*배경색 설정*/
   padding: 5px; /* 내부 여백 */
   border-radius: 30px; /* 둥근 모서리 */
@@ -114,16 +116,16 @@
   padding-top: 1%;
   padding-left: 1%;
   padding-right: 6%;
-  height: 90%;
+  height: 583px;
   background-color: white; /* 배경색 설정 */
   border-radius: 25px; /* 둥근 모서리 */
 }
 
 /* 일정 색상*/
 :root {
-  --marker-접수-시작: #9AC8FF; /* 접수 시작 이벤트 배경색 */
-  --marker-접수-마감: #FF9A9A; /* 접수 마감 이벤트 배경색 */
-  --marker-시험일: #9AFFD5; /* 시험일 이벤트 배경색 */
-  --marker-발표일: #FFFB9A; /* 발표일 이벤트 배경색 */
-  --marker-만료일: #FFBF9A; /*보유 자격증 만료일*/
+  --marker-receiveStart: #9AC8FF; /* 접수 시작 이벤트 배경색 */
+  --marker-receiveEnd: #FF9A9A; /* 접수 마감 이벤트 배경색 */
+  --marker-exam: #9AFFD5; /* 시험일 이벤트 배경색 */
+  --marker-results: #FFFB9A; /* 발표일 이벤트 배경색 */
+  --marker-expired: #FFBF9A; /*보유 자격증 만료일*/
 }

@@ -2,35 +2,32 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/Schedule/Calendar.css';
 
-/* 예시 일정 데이터 */
-// const calendarData = {
-//   '2024-09-13': [{ type: '시험일', description: '정보처리기사 시험일' }],
-//   '2024-09-23': [
-//     { type: '접수 시작', description: 'SQLD 접수 시작' },
-//     { type: '시험일', description: '정보처리기사 시험일' },
-//   ],
-//   '2024-09-29': [
-//     { type: '접수 시작', description: 'ADP 접수 시작' },
-//     { type: '시험일', description: '정보처리기사 시험일' },
-//     { type: '발표일', description: 'SQLD 발표일' },
-//     { type: '발표일', description: 'SQLD 발표일' },
-//     { type: '발표일', description: 'SQLD 발표일' }
-//   ],
-//   '2024-09-30': [{ type: '접수 마감', description: 'ADP 접수 마감' }],
-// };
+// const calendarData = [
+//   { certName: '정보처리 기사', date: '2024/11/13', type: 'exam' },
+//   { certName: 'SQLD', date: '2024/11/23', type: 'receiveStart' },
+//   { certName: '정보처리 기사', date: '2024/11/23', type: 'exam' },
+//   { certName: 'ADP', date: '2024/11/29', type: 'receiveStart' },
+//   { certName: '정보처리 기사', date: '2024/11/29', type: 'exam' },
+//   { certName: 'SQLD', date: '2024/11/29', type: 'results' },
+//   { certName: 'SQLD', date: '2024/11/29', type: 'results' },
+//   { certName: 'SQLD', date: '2024/11/29', type: 'results' },
+//   { certName: 'ADP', date: '2024/11/30', type: 'receiveEnd' }
+// ];
 
 const ScheduleManage = () => {
+  const [calendarData, setCalendarData] = useState([]); // 일정 데이터
+  const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
   // 오늘 날짜를 기준으로 초기 상태 설정
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear()); // 현재 연도
   const [currentMonth, setCurrentMonth] = useState(today.getMonth()); // 현재 월 (0부터 시작)
   const [selectedDate, setSelectedDate] = useState(
-    `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today
+    `${today.getFullYear()}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today
       .getDate()
       .toString()
       .padStart(2, '0')}`
   ); // 선택된 날짜, 기본값은 오늘 날짜
-  const [calendarData, setCalendarData] = useState({}); // 일정 데이터
 
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토']; // 요일 배열
 
@@ -41,22 +38,13 @@ const ScheduleManage = () => {
         const response = await axios.post('http://localhost:5000/api/schedule', {}, { withCredentials: true });
         const data = response.data;
 
-        // 데이터 형식 변환
-        const formattedData = {};
-        data.forEach((item) => {
-          const date = item.date.split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
-          if (!formattedData[date]) {
-            formattedData[date] = [];
-          }
-          formattedData[date].push({
-            type: item.type,
-            description: item.certName,
-          });
-        });
-
-        setCalendarData(formattedData);
+        setCalendarData(response.data);
+        console.log('response', response);
+        console.log('response Data:', response.data);
+        setLoading(false); // 로딩 완료
       } catch (error) {
         console.error('데이터를 불러오는 중 오류 발생:', error);
+        setLoading(false); // 로딩 완료 (오류 상태에서도)
       }
     };
 
@@ -99,14 +87,77 @@ const ScheduleManage = () => {
 
   // 특정 날짜를 클릭했을 때 선택된 날짜를 설정하는 함수
   const handleDateClick = (day) => {
-    const formattedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day
+    const formattedDate = `${currentYear}/${(currentMonth + 1).toString().padStart(2, '0')}/${day
       .toString()
       .padStart(2, '0')}`; // yyyy-mm-dd 형식으로 날짜 포맷
     setSelectedDate(formattedDate); // 선택된 날짜 업데이트
   };
 
+  // 특정 날짜에 해당하는 이벤트를 필터링하는 함수
+  const getEventsForDate = (date) => {
+    return calendarData
+      .filter(event => event.date === date)
+      .map(event => {
+        let description;
+
+        switch (event.type) {
+          case 'expired':
+            description = (
+              <>
+                {event.certName} <br /> 만료일
+              </>
+            );
+            break;
+          case 'exam':
+            description = (
+              <>
+                {event.certName} <br /> 시험일
+              </>
+            );
+            break;
+          case 'receiveStart':
+            description = (
+              <>
+                {event.certName} <br /> 접수 시작일
+              </>
+            );
+            break;
+          case 'receiveEnd':
+            description = (
+              <>
+                {event.certName} <br /> 접수 마감일
+              </>
+            );
+            break;
+          case 'results':
+            description = (
+              <>
+                {event.certName} <br /> 결과 발표일
+              </>
+            );
+            break;
+          default:
+            description = (
+              <>
+                {event.certName} <br /> {event.type}
+              </>
+            );
+        }
+
+        return {
+
+          description: description,
+          type: event.type
+        };
+      });
+  };
+
   // 캘린더를 생성하는 함수
   const renderCalendar = () => {
+    if (loading) {
+      return <div>Loading...</div>; // 로딩 중 메시지
+    }
+
     const daysInMonth = getDaysInMonth(currentYear, currentMonth); // 해당 월의 일 수
     const firstDay = getFirstDayOfMonth(currentYear, currentMonth); // 해당 월의 시작 요일
 
@@ -120,10 +171,10 @@ const ScheduleManage = () => {
 
     // 월의 각 날짜를 셀로 생성
     for (let day = 1; day <= daysInMonth; day++) {
-      const formattedDate = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day
+      const formattedDate = `${currentYear}/${(currentMonth + 1).toString().padStart(2, '0')}/${day
         .toString()
         .padStart(2, '0')}`; // yyyy-mm-dd 형식
-      const events = calendarData[formattedDate] || []; // 해당 날짜의 이벤트
+        const events = getEventsForDate(formattedDate); // 해당 날짜의 일정 
 
       week.push(
         <td
@@ -142,8 +193,8 @@ const ScheduleManage = () => {
                 {event.description}
               </div>
             ))}
-            {events.length > 2 && (
-              <div className="event-box more-events">+{events.length - 2} more</div> // 2개 초과 이벤트 표시
+            {events.length > 1 && (
+              <div className="event-box more-events">+{events.length - 1} more</div> // 2개 초과 이벤트 표시
             )}
           </div>
         </td>
@@ -195,7 +246,7 @@ const ScheduleManage = () => {
         </div>
         <div className='detailBox2'>
         <ul>
-          {(calendarData[selectedDate] || []).map((event, index) => (
+         {getEventsForDate(selectedDate).map((event, index) => (
             <div
             key={index}
             className="event-box"
