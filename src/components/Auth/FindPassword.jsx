@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/FindPassword.css'; // 비밀번호 찾기 전용 스타일을 추가하거나 수정하세요.
 
-const FindPassword = () => {
-  const navigate = useNavigate();
+const FindPassword = ({ onClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+  const [isOutputVisible, setIsOutputVisible] = useState(false); // outputField 표시 여부 상태 추가
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 방지
       
     if (!name) {
@@ -26,56 +28,66 @@ const FindPassword = () => {
       return; 
     }
 
-    alert(`이름: ${name}\n이메일: ${email}\n전화번호: ${phone}\n\n다음과 같은 정보로 비밀번호 찾기를 진행할까요?`);
-  };
-
-  const handleGoToLogin = () => {
-    navigate('/Login');  
+    try {
+      const response = await axios.post('http://localhost:5000/api/password', {
+        name,
+        email,
+        phone,
+      });
+  
+      setMessage(response.data.message);
+      setIsOutputVisible(true); // outputField 표시
+    } catch (error) {
+      setMessage('서버 오류가 발생했습니다.');
+      setIsOutputVisible(true);
+    }
   };
 
   return (
-    <div className='findPassword'>
-       <h2>비밀번호 찾기</h2>
-        <div className='findPasswordMainSection'>
-          <form onSubmit={handleSubmit}>
-            <div className="findPasswordField">
-              <p>이름</p>
-              <p> | </p>
-              <input 
-                type="text" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                required 
-              />
-            </div>
-            <div className="findPasswordField">
-              <p>EMAIL</p>
-              <p> | </p>
-              <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
-              />
-            </div>
-            <div className="findPasswordField">
-              <p>전화번호</p>
-              <p> | </p>
-              <input 
-                type="tel" 
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)} 
-                required 
-              />
-            </div>
-            <div className="findPasswordSubmit">
-              <button type="submit">비밀번호 찾기</button>
-            </div>
-          </form>
-          <div className='outputField'>
-            <button onClick={handleGoToLogin}>로그인 화면으로 돌아가기</button>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>비밀번호 찾기</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="findPasswordField">
+            이름<input
+              type="text"
+              placeholder="NAME"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
-        </div>
+          <div className="findPasswordField">
+            이메일<input
+              type="email"
+              placeholder="ex) aaa@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="findPasswordField">
+            전화번호<input
+              type="tel"
+              placeholder="ex) 010-xxxx-xxxx"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
+          <div className="findPasswordSubmit">
+            {isOutputVisible && (
+              <div className="outputField">
+                <p>{message}</p>
+              </div>
+              )}
+            {!isOutputVisible && (
+              <button type="submit">비밀번호 찾기</button> /* isOutputVisible이 false일 때만 표시 */
+            )}
+            <button type="button" onClick={onClose}>닫기</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

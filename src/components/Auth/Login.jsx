@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import '../../styles/Login.css';
+import FindPasswordModal from './FindPassword';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,14 +12,11 @@ const Login = () => {
     navigate('/SignUp');
   };
 
-  const handleClickforFindPassword = () => {
-    navigate('/FindPassword');
-  }
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cookies, setCookie] = useCookies(["rememberEmail"]);
   const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
 
   useEffect(() => {
     if (cookies.rememberEmail !== undefined) {
@@ -78,8 +76,11 @@ const Login = () => {
       <hr />
       <div className="nav-at-login">
         <div className="nav-signup" onClick={handleClickforSignup}>회원가입</div>
-        <div className="nav-find-password" onClick={handleClickforFindPassword}>비밀번호 찾기</div>
+        <div className="nav-find-password" onClick={() => setIsModalOpen(true)}>비밀번호 찾기</div>
       </div>
+      {isModalOpen && (
+        <FindPasswordModal onClose={() => setIsModalOpen(false)} />
+      )}
     </div>
   );
 };
