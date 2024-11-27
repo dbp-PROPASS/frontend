@@ -1,111 +1,112 @@
-/* Community.css */
-
+/* Community 전체 스타일 */
 .community {
-    font-family: Arial, sans-serif;
-    color: #6c5c5c;
-    width: 70%;
-    margin: auto;
-  }
-  
-  .title {
-    font-size: 2em;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .category-select {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .category-select select {
-    background-color: #e3e0dd;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .search-input {
-    padding: 5px;
-    width: 200px;
-    border: 1px solid #ccc;
-  }
-  
-  .post-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-  }
-  
-  .post-table th, .post-table td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .post-table th {
-    background-color: #e3e0dd;
-    font-weight: bold;
-  }
-  
-  .post-table tr {
-    cursor: pointer;
-  }
-  
-  .post-table tr:hover {
-    background-color: #eae6e3;
-  }
-  
-  .pagination {
-    text-align: center;
-    margin-top: 10px;
-    color: #6c5c5c;
-  }
-  
-  .pagination span {
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .pagination span:hover {
-    text-decoration: underline;
-  }
-  
-  .detail-view .back-button {
-    background-color: #e3e0dd;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-bottom: 15px;
-  }
-  
-  .detail-view h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .post-content {
-    background-color: #e3e0dd;
-    padding: 15px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .comments ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .comments li {
-    margin-bottom: 5px;
-  }
-  
-  .comments li strong {
-    color: #6c5c5c;
-  }
-  
-  /* 글 작성 화면 스타일 */
+  font-family: Arial, sans-serif;
+  color: #6c5c5c;
+  width: 70%;
+  margin: auto;
+}
+
+/* 제목 스타일 */
+.title {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 카테고리 선택 및 검색창 스타일 */
+.category-select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.category-select select {
+  background-color: #e3e0dd;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.search-input {
+  padding: 5px;
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+/* 게시글 테이블 스타일 */
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.post-table th, .post-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.post-table th {
+  background-color: #e3e0dd;
+  font-weight: bold;
+}
+
+.post-table tr {
+  cursor: pointer;
+}
+
+.post-table tr:hover {
+  background-color: #eae6e3;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+  text-align: center;
+  margin-top: 10px;
+  color: #6c5c5c;
+}
+
+.pagination span {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination span:hover {
+  text-decoration: underline;
+}
+
+/* 글 작성 버튼 스타일 */
+.nav-at-Community {
+  background-color: #d1c6c1;
+  color: white;
+  font-size: 1.2em;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+  display: inline-block;
+  text-align: center;
+  width: 200px;
+}
+
+.nav-at-Community:hover {
+  background-color: #d1ac9b;
+  transform: scale(1.05);
+}
+
+.nav-at-Community:focus {
+  outline: none;
+  box-shadow: 0 0 5px #d1c6c1;
+}
+
+.nav-at-Community:active {
+  background-color: #d1ac9b;
+  transform: scale(1);
+}
+
+/* 글 작성 뷰 스타일 (Write View) */
 .write-view {
   background-color: #f9f9f9;
   padding: 30px;
@@ -164,25 +165,6 @@
   background-color: #0056b3;
 }
 
-.write-view button[type="button"] {
-  background-color: #6c5c5c;
-  margin-left: 10px;
-}
-
-.write-view button[type="button"]:hover {
-  background-color: #444;
-}
-
-.write-view .form-group input,
-.write-view .form-group textarea {
-  background-color: #fff;
-}
-
-.write-view .form-group input::placeholder,
-.write-view .form-group textarea::placeholder {
-  color: #aaa;
-}
-
 .write-view .back-button {
   background-color: #e3e0dd;
   border: none;
@@ -198,35 +180,4 @@
 
 .write-view .back-button:hover {
   background-color: #d1c6c1;
-}
-
-/* 글 작성 버튼 스타일 */
-.write-button {
-  background-color: #d1c6c1; /* 버튼 배경색 (녹색) */
-  color: white;
-  font-size: 1.2em;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* 호버 효과 및 크기 변화 */
-  margin-top: 20px;
-  display: inline-block; /* 다른 요소들과 함께 배치 */
-  text-align: center;
-  width: 200px; /* 버튼 고정 너비 */
-}
-
-.write-button:hover {
-  background-color: #d1ac9b; /* 호버 시 더 어두운 녹색 */
-  transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
-}
-
-.write-button:focus {
-  outline: none; /* 포커스 시 외곽선 제거 */
-  box-shadow: 0 0 5px #d1c6c1; /* 포커스 시 그림자 효과 */
-}
-
-.write-button:active {
-  background-color: #d1ac9b; /* 클릭 시 더 어두운 녹색 */
-  transform: scale(1); /* 클릭 시 크기 복원 */
 }
