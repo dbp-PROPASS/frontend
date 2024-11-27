@@ -24,7 +24,7 @@ const AddPosts = () => {
     e.preventDefault(); // 폼의 기본 동작 막기
 
     try {
-      const response = await axios.post('http://localhost:5000/api/AddPosts', formData);
+      const response = await axios.post('http://localhost:5000/api/addPost', formData);
       alert(response.data.message); // 서버에서 받은 메시지 출력
     } catch (err) {
       console.error(err);
