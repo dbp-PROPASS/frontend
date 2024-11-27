@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/Community/Community.css';
 import AddPosts from './AddPosts'; // AddPosts 컴포넌트 임포트
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Community = () => {
   const [view, setView] = useState('list'); // List/Write/Detail 상태 관리
@@ -12,7 +14,17 @@ const Community = () => {
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
 
   const postsPerPage = 8; // 페이지당 게시글 수
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const sessionToken = Cookies.get('rememberEmail'); // 쿠키에서 토큰 가져오기
+
+    if (!sessionToken) {
+      alert("로그인이 필요합니다.");
+      navigate('/login'); // 로그인 페이지로 이동
+    }
+  }, [navigate]);
+  
   // 데이터 가져오기
   useEffect(() => {
     const fetchPosts = async () => {
