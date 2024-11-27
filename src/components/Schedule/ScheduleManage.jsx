@@ -152,6 +152,16 @@ const ScheduleManage = () => {
       });
   };
 
+  const handleTodayClick = () => {
+    const today = new Date();
+    const formattedToday = `${today.getFullYear()}/${(today.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${today.getDate().toString().padStart(2, '0')}`;
+    setSelectedDate(formattedToday); // 선택된 날짜를 오늘 날짜로 설정
+    setCurrentYear(today.getFullYear()); // 연도를 오늘 연도로 설정
+    setCurrentMonth(today.getMonth()); // 월을 오늘 월로 설정
+  };
+
   // 캘린더를 생성하는 함수
   const renderCalendar = () => {
     if (loading) {
@@ -249,7 +259,7 @@ const ScheduleManage = () => {
          {getEventsForDate(selectedDate).map((event, index) => (
             <div
             key={index}
-            className="event-box"
+            className="event-box-detail"
             style={{
               backgroundColor: `var(--marker-${event.type.replace(/\s/g, '-')})`,
               marginBottom: '10px'
@@ -260,6 +270,9 @@ const ScheduleManage = () => {
           ))}
         </ul>
         </div>
+        <button onClick={handleTodayClick} className="today-button">
+          오늘 날짜로 돌아가기
+        </button>
       </div>
     </div>
   );
