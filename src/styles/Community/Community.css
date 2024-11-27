@@ -105,3 +105,128 @@
     color: #6c5c5c;
   }
   
+  /* 글 작성 화면 스타일 */
+.write-view {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.write-view h2 {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.write-view .form-group {
+  margin-bottom: 20px;
+}
+
+.write-view label {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+.write-view input,
+.write-view textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.write-view input:focus,
+.write-view textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.write-view button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.write-view button:hover {
+  background-color: #0056b3;
+}
+
+.write-view button[type="button"] {
+  background-color: #6c5c5c;
+  margin-left: 10px;
+}
+
+.write-view button[type="button"]:hover {
+  background-color: #444;
+}
+
+.write-view .form-group input,
+.write-view .form-group textarea {
+  background-color: #fff;
+}
+
+.write-view .form-group input::placeholder,
+.write-view .form-group textarea::placeholder {
+  color: #aaa;
+}
+
+.write-view .back-button {
+  background-color: #e3e0dd;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+.write-view .back-button:hover {
+  background-color: #d1c6c1;
+}
+
+/* 글 작성 버튼 스타일 */
+.write-button {
+  background-color: #d1c6c1; /* 버튼 배경색 (녹색) */
+  color: white;
+  font-size: 1.2em;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 호버 효과 및 크기 변화 */
+  margin-top: 20px;
+  display: inline-block; /* 다른 요소들과 함께 배치 */
+  text-align: center;
+  width: 200px; /* 버튼 고정 너비 */
+}
+
+.write-button:hover {
+  background-color: #d1ac9b; /* 호버 시 더 어두운 녹색 */
+  transform: scale(1.05); /* 호버 시 버튼 크기 약간 커짐 */
+}
+
+.write-button:focus {
+  outline: none; /* 포커스 시 외곽선 제거 */
+  box-shadow: 0 0 5px #d1c6c1; /* 포커스 시 그림자 효과 */
+}
+
+.write-button:active {
+  background-color: #d1ac9b; /* 클릭 시 더 어두운 녹색 */
+  transform: scale(1); /* 클릭 시 크기 복원 */
+}

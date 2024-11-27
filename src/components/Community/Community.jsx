@@ -3,11 +3,13 @@ import axios from 'axios';
 import '../../styles/Community/Community.css';
 
 const Community = () => {
-  const [view, setView] = useState('list'); // List/Detail View
+  const [view, setView] = useState('list'); // List/Detail/Write View
   const [searchTerm, setSearchTerm] = useState(''); // 검색어
   const [category, setCategory] = useState('it'); // 현재 선택된 카테고리
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
+
+  const [newPost, setNewPost] = useState({ title: '', content: '', author: '' }); // 새 글 작성 데이터
 
   const postsPerPage = 8; // 페이지당 게시글 수
 
@@ -35,9 +37,32 @@ const Community = () => {
     currentPage * postsPerPage
   );
 
+  // 글 작성 핸들러
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/api/posts', {
+        ...newPost,
+        category, // 현재 선택된 카테고리 추가
+      });
+      alert('글이 성공적으로 등록되었습니다!');
+      setNewPost({ title: '', content: '', author: '' }); // 폼 초기화
+      setView('list'); // 작성 후 목록으로 돌아가기
+    } catch (error) {
+      console.error('Error submitting post:', error);
+      alert('글 작성 중 오류가 발생했습니다.');
+    }
+  };
+
   // 목록 화면 렌더링
   const renderListView = () => (
-    <div className="community"><br></br><br></br><br></br><br></br><br></br><br></br>
+    <div className="community">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className="category-select">
         <select
           value={category}
@@ -50,7 +75,7 @@ const Community = () => {
           <option value="english">영어 분야</option>
           <option value="finance">금융 분야</option>
         </select>
-  
+
         <input
           type="text"
           placeholder="검색할 내용을 입력해주세요."
@@ -59,7 +84,11 @@ const Community = () => {
           className="search-input"
         />
       </div>
-  
+
+      <button className="write-button" onClick={() => setView('write')}>
+        글 작성
+      </button>
+
       <table className="post-table">
         <thead>
           <tr>
@@ -80,7 +109,7 @@ const Community = () => {
             ))}
         </tbody>
       </table>
-  
+
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <span
@@ -94,13 +123,64 @@ const Community = () => {
       </div>
     </div>
   );
-  
+
+  // 글 작성 화면 렌더링
+  const renderWriteView = () => (
+    <div className="community write-view">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <h2>새 글 작성</h2>
+      <form onSubmit={handlePostSubmit}>
+        <div className="form-group">
+          <label>제목</label>
+          <input
+            type="text"
+            value={newPost.title}
+            onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>내용</label>
+          <textarea
+            rows="5"
+            value={newPost.content}
+            onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>작성자</label>
+          <input
+            type="text"
+            value={newPost.author}
+            onChange={(e) => setNewPost({ ...newPost, author: e.target.value })}
+            required
+          />
+        </div>
+        <button type="submit">게시하기</button>
+        <button type="button" onClick={() => setView('list')}>
+          취소
+        </button>
+      </form>
+    </div>
+  );
 
   // 상세 화면 렌더링
   const renderDetailView = () => {
     const post = postsData.find((p) => p.postId === view);
     return (
       <div className="community detail-view">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
         <button className="back-button" onClick={() => setView('list')}>
           뒤로가기
         </button>
@@ -113,7 +193,11 @@ const Community = () => {
     );
   };
 
-  return view === 'list' ? renderListView() : renderDetailView();
+  return view === 'list'
+    ? renderListView()
+    : view === 'write'
+    ? renderWriteView()
+    : renderDetailView();
 };
 
 export default Community;
