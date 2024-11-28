@@ -11,19 +11,19 @@
   flex-direction: column;
 }
 
-table {
+.certificateTable table {
   background-color: #fff;
   border-radius: 8px;
   border-collapse: collapse;
 }
 
-th, td {
+.certificateTable th, .certificateTable td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
 }
 
-th {
+.certificateTable th {
   background-color: #ececec;
 }
 
