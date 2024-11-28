@@ -1,7 +1,10 @@
 /* 전체 스케줄 컨테이너 */
 .schedule-container {
   padding-top: 100px; /* 컨테이너 상단 여백을 100px로 설정 */
+  padding-left: 3%;
+  padding-right: 3%;
   display: flex; /* 캘린더와 세부 일정 리스트를 수평으로 배치 */
+  justify-content: space-between;
   gap: 20px; /* 캘린더와 세부 일정 리스트 간의 간격 설정 */
   font-family: Arial, sans-serif; /* 기본 폰트 설정 */
   color: #8A7968;
@@ -9,14 +12,14 @@
 
 /* 캘린더 섹션 */
 .calendar {
-  padding-left: 2%;
-  width: 60%; /* 캘린더의 가로폭을 컨테이너의 60%로 설정 */
-  /* max-height: 700px; 캘린더 전체 높이 고정 */
+  width: 58%; /* 캘린더의 가로폭을 컨테이너의 60%로 설정 */
+  height: 100%;
   overflow: hidden; /* 내용이 넘칠 경우 스크롤을 숨김 */
 }
 
 /* 캘린더 상단 네비게이션 (이전/다음 버튼 및 월/년도 표시) */
 .calendar-header {
+  height: 8%;
   font-size: 30px;
   font-weight: bold;
   display: flex; /* 버튼과 텍스트를 가로로 배치 */
@@ -28,6 +31,7 @@
 /* 캘린더 테이블 */
 .calendar table {
   width: 100%; /* 테이블이 캘린더 영역을 꽉 채우도록 설정 */
+  height: 100%;
   border-collapse: collapse; /* 테두리 겹침 방지 */
   table-layout: fixed; /* 셀 너비를 일정하게 유지 */
   border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
@@ -43,8 +47,7 @@
 
 /* 날짜 셀 스타일 */
 .calendar td {
-  width: 14.2%; /* 7열 기준으로 균등 분할 */
-  /* height: 120px; 셀 높이를 고정 */
+  padding: 3px 8px;
   text-align: left; /* 텍스트를 왼쪽 정렬 */
   border: 2px solid #8A7968; /* 셀 테두리 설정 */
   cursor: pointer; /* 마우스 오버 시 포인터 커서 표시 */
@@ -67,14 +70,14 @@
 /* 날짜 표시 스타일 */
 .day-number {
   position: absolute; /* 날짜를 셀 내의 특정 위치에 고정 */
-  top: 5px; /* 셀 상단에서 5px 떨어진 위치에 배치 */
-  right: 5px; /* 셀 오른쪽에서 5px 떨어진 위치에 배치 */
+  top: 7%; /* 셀 상단에서 5px 떨어진 위치에 배치 */
+  right: 7%; /* 셀 오른쪽에서 5px 떨어진 위치에 배치 */
   font-weight: bold; /* 날짜 텍스트를 볼드 처리 */
 }
 
 /* 이벤트 마커 컨테이너 스타일 */
 .event-markers {
-  margin-top: 20px; /* 날짜와 이벤트 리스트 사이의 간격 */
+  margin-top: 30px; /* 날짜와 이벤트 리스트 사이의 간격 */
   height: 90px; /* 이벤트 리스트의 최대 높이 */
   overflow-y: auto; /* 이벤트가 많을 경우 수직 스크롤 표시 */
   display: flex; /* 이벤트 마커를 수직으로 나열 */
@@ -85,7 +88,7 @@
 /* 이벤트 박스 스타일 */
 .event-box {
   padding: 4px 8px; /* 이벤트 박스 내부 여백 */
-  border-radius: 12px; /* 둥근 모서리 */
+  border-radius: 15px; /* 둥근 모서리 */
   color: black; /* 텍스트 색상 */
   font-size: 0.8rem; /* 폰트 크기 */
   text-align: center; /* 텍스트 중앙 정렬 */
@@ -102,7 +105,7 @@
 .schedule-details {
   margin-top: 10px;
   margin-left: 1%;
-  width: 36%; /* 오른쪽 패널의 폭을 전체의 35%로 설정 */
+  width: 36%; /* 오른쪽 패널의 폭을 전체의 36%로 설정 */
   height: 670px;
   background-color: #8A7968; /*배경색 설정*/
   padding: 5px; /* 내부 여백 */
@@ -123,29 +126,38 @@
 
 .event-box-detail {
   padding: 4px 8px; /* 이벤트 박스 내부 여백 */
-  border-radius: 12px; /* 둥근 모서리 */
+  border-radius: 20px; /* 둥근 모서리 */
   color: black; /* 텍스트 색상 */
   font-weight: bold;
   font-size: 1.1rem; /* 폰트 크기 */
   text-align: center; /* 텍스트 중앙 정렬 */
 }
 
-.today-button {
-  margin-top: 25px; /* 버튼 위쪽 여백 */
-  padding: 12px 22px; /* 버튼 내부 여백 */
+.schedule-container button {
   font-size: 1.2rem; /* 버튼 텍스트 크기 */
   font-weight: bold; /* 버튼 텍스트 굵기 */
   color: white; /* 버튼 텍스트 색상 */
   background-color: #8a7968; /* 버튼 배경색 */
   border: none; /* 버튼 테두리 제거 */
-  border-radius: 10px; /* 버튼 모서리 둥글게 */
   cursor: pointer; /* 마우스 커서를 포인터로 변경 */
   transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
 }
 
 /* 버튼 마우스 호버 시 스타일 */
-.today-button:hover {
+.schedule-container button:hover {
   background-color: #6c5a48; /* 호버 시 배경색 변경 */
+}
+
+.calendar-header button {
+  margin-top: 10px; /* 버튼 위쪽 여백 */
+  padding: 12px 20px; /* 버튼 내부 여백 */
+  border-radius: 30px; /* 버튼 모서리 둥글게 */
+}
+
+.schedule-details button{
+  margin-top: 25px; /* 버튼 위쪽 여백 */
+  padding: 12px 22px; /* 버튼 내부 여백 */
+  border-radius: 15px; /* 버튼 모서리 둥글게 */
 }
 
 /* 일정 색상*/

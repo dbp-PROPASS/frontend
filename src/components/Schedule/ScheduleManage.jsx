@@ -194,7 +194,7 @@ const ScheduleManage = () => {
         >
           <div className="day-number">{day}</div> {/* 날짜 번호 */}
           <div className="event-markers">
-            {events.slice(0, 2).map((event, index) => (
+            {events.slice(0, 1).map((event, index) => (
               <div
                 key={`marker-${index}`}
                 className="event-box"
