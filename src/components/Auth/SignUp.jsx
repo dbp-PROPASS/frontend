@@ -181,12 +181,12 @@ const SignUp = () => {
               onChange={(e) => setEnteredCode(e.target.value)} 
               placeholder="인증코드 입력"
             />
+            {isCodeCorrect === false && <h5 style={{ color: 'red' }}>인증코드가 일치하지 않습니다.</h5>}
+            {isCodeCorrect === true && <h5 style={{ color: 'green' }}>인증 성공!</h5>}
             <div className="signup-modalButtons">
               <button onClick={handleVerificationSubmit}>확인</button>
               <button onClick={handleModalClose}>닫기</button>
             </div>
-            {isCodeCorrect === false && <h5 style={{ color: 'red' }}>인증코드가 일치하지 않습니다.</h5>}
-            {isCodeCorrect === true && <h5 style={{ color: 'green' }}>인증 성공!</h5>}
           </div>
         </div>
       )}

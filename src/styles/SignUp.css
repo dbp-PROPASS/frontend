@@ -180,11 +180,11 @@
 
 .signup-modalButtons {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   gap: 10px;
 }
 
-.signup-modalButtons button, .close-button {
+.signup-modalButtons button {
   padding: 10px;
   border: none;
   border-radius: 5px;
