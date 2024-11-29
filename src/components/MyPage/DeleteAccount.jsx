@@ -1,9 +1,11 @@
 import React from 'react';
+import Cookies from 'js-cookie'; // 쿠키 읽기 라이브러리
 import '../../styles/MyPage/DeleteAccount.css';
 
 const handleDelete = async () => {
   try {
-    const email = "test@example.com"
+    const email = Cookies.get('rememberEmail'); // 쿠키에서 이메일 가져오기
+
     const response = await fetch(
       `http://localhost:5000/api/account/${email}`,
       { method: "DELETE" }
@@ -13,6 +15,9 @@ const handleDelete = async () => {
 
     if (data.success) {
       alert(data.message); // 회원탈퇴 성공 메시지
+      // 추가: 로그아웃 처리 및 메인 페이지로 이동
+      Cookies.remove('rememberEmail');
+      window.location.href = '/';
     } else {
       alert(data.message); // 실패 메시지
     }
