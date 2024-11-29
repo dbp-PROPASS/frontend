@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/SignUp.css';
+import { interestsOptions } from '../../data/interestsOptions';  // 데이터 import
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -131,16 +132,9 @@ const SignUp = () => {
             <div className="signUpselectWrapper">
               <select name="interests" onChange={handleInterestSelect}>
                 <option value="">선택하세요 ▼</option>
-                <option value="a">IT/컴퓨터</option>
-                <option value="b">어학</option>
-                <option value="경영/회계/금융">경영/회계/금융</option>
-                <option value="건축/토목/기술">건축/토목/기술</option>
-                <option value="e">의료/보건</option>
-                <option value="f">교육/상담</option>
-                <option value="g">공예/디자인</option>
-                <option value="h">조리/식음료</option>
-                <option value="i">운전/기계</option>
-                <option value="국가 자격증">국가 자격증</option>
+                {interestsOptions.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
               </select>
             </div>
             <div className="selectedInterests">

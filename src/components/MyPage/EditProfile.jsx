@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import '../../styles/MyPage/EditProfile.css';
+import { interestsOptions } from '../../data/interestsOptions'
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({
@@ -165,18 +166,11 @@ const EditProfile = () => {
             <p>관심분야</p>
             <p> | </p>
             <div className="editProfileselectWrapper">
-            <select name="editProfileinterests" onChange={handleInterestSelect}>
+              <select name="editProfileinterests" onChange={handleInterestSelect}>
                 <option value="">선택하세요 ▼</option>
-                <option value="a">IT/컴퓨터</option>
-                <option value="b">어학</option>
-                <option value="경영/회계/금융">경영/회계/금융</option>
-                <option value="건축/토목/기술">건축/토목/기술</option>
-                <option value="e">의료/보건</option>
-                <option value="f">교육/상담</option>
-                <option value="g">공예/디자인</option>
-                <option value="h">조리/식음료</option>
-                <option value="i">운전/기계</option>
-                <option value="국가 자격증">국가 자격증</option>
+                {interestsOptions.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
               </select>
             </div>
             <div className="editProfileselectedInterests">
