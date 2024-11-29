@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/SignUp.css';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     password: '',
@@ -18,7 +21,6 @@ const SignUp = () => {
   // 관심분야 선택 핸들러
   const handleInterestSelect = (e) => {
     const value = e.target.value;
-
     if (value && !selectedInterests.includes(value)) {
       if (selectedInterests.length < 3) {
         setSelectedInterests((prev) => [...prev, value]);
@@ -42,10 +44,38 @@ const SignUp = () => {
     }));
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [enteredCode, setEnteredCode] = useState('');
+  const [isCodeCorrect, setIsCodeCorrect] = useState(null);
+
+  const handleEditClick = () => {
+    setIsModalOpen(true); // 모달 열기
+    setVerificationCode('1234'); // Hardcoded for example
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleVerificationSubmit = () => {
+    if (enteredCode === verificationCode) {
+      setIsCodeCorrect(true);
+    } else {
+      setIsCodeCorrect(false);
+    }
+  };
+
   // 폼 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼의 기본 동작 막기
-  
+    
+    // 인증 코드가 맞지 않거나, 인증 코드가 입력되지 않은 경우 제출하지 않음
+    if (isCodeCorrect !== true) {
+      alert('이메일 인증을 완료해주세요.');
+      return;
+    }
+
     // 관심분야를 formData에 포함
     const submissionData = {
       ...formData,
@@ -55,6 +85,7 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/signup', submissionData);
       alert(response.data.message); // 서버에서 받은 메시지 출력
+      navigate('/login')
     } catch (err) {
       console.error(err);
       alert('회원가입 중 오류가 발생했습니다.');
@@ -81,18 +112,18 @@ const SignUp = () => {
             <p>EMAIL</p>
             <p> | </p>
             <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
-            <button type="button">인증 받기</button>
+            <button type="button" onClick={() => handleEditClick()}>인증 받기</button>
           </div>
           <div className="signUpField">
             <p>전화번호</p>
             <p> | </p>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange}/>
+            <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="ex) 010-xxxx-xxxx"/>
             <button type="button">인증 받기</button>
           </div>
           <div className="signUpField">
             <p>연령대</p>
             <p> | </p>
-            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange}/>
+            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange} placeholder="ex) 20s"/>
           </div>
           <div className="signUpField">
             <p>관심분야</p>
@@ -138,6 +169,27 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+
+      {isModalOpen && (
+        <div className="signup-modal">
+          <div className="signup-modalContent">  
+            <h2>이메일 인증</h2>
+            <h5>{formData.email}로 인증코드를 발송했습니다.</h5>
+            <input 
+              type="text" 
+              value={enteredCode} 
+              onChange={(e) => setEnteredCode(e.target.value)} 
+              placeholder="인증코드 입력"
+            />
+            <div className="signup-modalButtons">
+              <button onClick={handleVerificationSubmit}>확인</button>
+              <button onClick={handleModalClose}>닫기</button>
+            </div>
+            {isCodeCorrect === false && <h5 style={{ color: 'red' }}>인증코드가 일치하지 않습니다.</h5>}
+            {isCodeCorrect === true && <h5 style={{ color: 'green' }}>인증 성공!</h5>}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
