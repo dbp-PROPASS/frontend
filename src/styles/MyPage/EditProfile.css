@@ -34,8 +34,9 @@
     font-weight: bolder;
   }
 
-  .selectWrapper select {
+  .editProfileselectWrapper select {
     padding: 10px 20px;
+    margin-right: 30px;
     border: none;
     border-radius: 30px; /* 둥근 모서리 */
     background-color: #e5e3e3; /* 선택 박스 배경색 */
@@ -44,8 +45,19 @@
     appearance: none; /* 기본 브라우저 스타일 제거 */
   }
   
-  .selectWrapper {
+  .editProfileselectWrapper {
     position: relative;
+  }
+
+  .editProfileselectedInterests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .editProfileinterestItem button {
+    background: none;
+    color: #8A7968;
   }
   
   .editProfileAlarm {
