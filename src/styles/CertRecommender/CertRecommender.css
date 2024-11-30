@@ -1,7 +1,83 @@
 .certRecommender {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
-    margin: 180px auto auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 180px auto auto auto;
 }
+
+.itemForRecommend {
+    background-color: #8A7968;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    height: 410px;
+  }
+  
+  .itemRecoTitle, .arrowButton {
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin: 5px 0px 20px 0px;
+    color: #4e4e4e;
+  }
+
+  .arrowButton {
+    background: none;
+    border: none;
+    color: #fff;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .itemRecoTitle {
+    width: 100%;
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    white-space: nowrap; 
+  }
+
+  .itemRecoTitle span {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    animation: none; /* 기본값은 애니메이션 없음 */
+  }
+  
+  .itemRecoTitle span.scroll {
+    animation: scrollText 10s linear infinite;
+  }
+  
+  @keyframes scrollText {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  
+  .itemRecoList {
+    background-color: #fff;
+    list-style: none;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0;
+    overflow-y: auto; /* 내용이 넘치면 스크롤 활성화 */
+    height: calc(100% - 90px);
+  }
+  
+  .itemRecoListItem {
+    font-size: 15px;
+    padding: 5px 0;
+    color: #333;
+    text-align: left;
+  }
+  
