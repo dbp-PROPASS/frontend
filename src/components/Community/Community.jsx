@@ -60,9 +60,16 @@ const Community = () => {
             setCurrentPage(1);
           }}
         >
-          <option value="it">IT 분야</option>
-          <option value="english">영어 분야</option>
-          <option value="finance">금융 분야</option>
+          <option value="it">IT/컴퓨터 분야</option>
+          <option value="english">어학 분야</option>
+          <option value="finance">경영/회계/금융 분야</option>
+          <option value="tech">운전/기계 분야</option>
+          <option value="medical">의료/보건 분야</option>
+          <option value="edu">교육/상담 분야</option>
+          <option value="design">공예/디자인 분야</option>
+          <option value="food">조리/식음료 분야</option>
+          <option value="architect">건축/토목/기술 분야</option>
+          <option value="national">국가 자격증 분야</option>
         </select>
 
         <input
@@ -129,6 +136,13 @@ const Community = () => {
     it: '2',
     english: '3',
     finance: '4',
+    tech: '5',
+    medical: '6',
+    edu: '7',
+    design: '8',
+    food: '9',
+    architect: '10',
+    national: '11',
   };
 
   return view === 'list'
