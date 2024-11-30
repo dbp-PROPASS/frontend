@@ -51,7 +51,7 @@ const Community = () => {
 
   // 목록 화면 렌더링
   const renderListView = () => (
-    <div className="community"><br></br><br></br><br></br><br></br><br></br><br></br>
+    <div className="community">
       <div className="category-select">
         <select
           value={category}
@@ -124,10 +124,26 @@ const Community = () => {
 
   // 상세보기 화면 렌더링
   const renderDetailView = () => (
-    <div className="post-detail"><br></br><br></br><br></br><br></br><br></br><br></br>
+    <div className="post-detail">
       <h2>{selectedPost.title}</h2>
       <p><strong>작성자:</strong> {selectedPost.author}</p>
       <p>{selectedPost.content}</p>
+
+      <div className="comments-section">
+        <h3>댓글</h3>
+        {selectedPost.comments.length > 0 ? (
+          <ul>
+            {selectedPost.comments.map((comment) => (
+              <li key={comment.commentId}>
+                <strong>{comment.author}</strong>: {comment.content}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>댓글이 없습니다.</p>
+        )}
+      </div>
+
       <button onClick={() => setView('list')}>목록으로</button>
     </div>
   );
