@@ -51,7 +51,7 @@ const Community = () => {
 
   // 목록 화면 렌더링
   const renderListView = () => (
-    <div className="community">
+    <div className="community"><br></br><br></br><br></br><br></br><br></br><br></br> 
       <div className="category-select">
         <select
           value={category}
@@ -124,7 +124,7 @@ const Community = () => {
 
   // 상세보기 화면 렌더링
   const renderDetailView = () => (
-    <div className="post-detail">
+    <div className="post-detail"><br></br><br></br><br></br><br></br><br></br><br></br> 
       <h2>{selectedPost.title}</h2>
       <p><strong>작성자:</strong> {selectedPost.author}</p>
       <p>{selectedPost.content}</p>
