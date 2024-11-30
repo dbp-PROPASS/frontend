@@ -136,7 +136,6 @@ const EditProfile = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="이메일"
               disabled // 이메일은 수정 불가
             />
           </div>
@@ -148,7 +147,7 @@ const EditProfile = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="전화번호"
+              placeholder="ex) 010-xxxx-xxxx"
             />
           </div>
           <div className="editProfileField">
@@ -159,7 +158,7 @@ const EditProfile = () => {
               name="age_group"
               value={formData.age_group}
               onChange={handleChange}
-              placeholder="연령대를 입력하세요"
+             placeholder="ex) 22세 → 20"
             />
           </div>
           <div className="editProfileField">

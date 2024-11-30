@@ -124,7 +124,7 @@ const SignUp = () => {
           <div className="signUpField">
             <p>연령대</p>
             <p> | </p>
-            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange} placeholder="ex) 20s"/>
+            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange} placeholder="ex) 22세 → 20"/>
           </div>
           <div className="signUpField">
             <p>관심분야</p>
