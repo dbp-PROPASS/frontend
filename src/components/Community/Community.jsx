@@ -125,10 +125,16 @@ const Community = () => {
     </div>
   );
 
+  const categoryMap = {
+    it: '2',
+    english: '3',
+    finance: '4',
+  };
+
   return view === 'list'
     ? renderListView()
     : view === 'write'
-    ? <AddPosts />
+    ? <AddPosts currentCategory={categoryMap[category]} />
     : view === 'detail'
     ? renderDetailView()
     : null;
