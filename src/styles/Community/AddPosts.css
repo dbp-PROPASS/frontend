@@ -2,82 +2,120 @@
 
 /* 메인 컨테이너 스타일 */
 .AddPosts {
-    background-color: #f9f9f9;
-    width: 60%;
-    margin: 50px auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-  
-  /* 제목 스타일 */
-  .AddPosts h2 {
-    text-align: center;
-    font-size: 2em;
-    color: #6c5c5c;
-    margin-bottom: 20px;
-  }
-  
-  /* 입력 폼 섹션 스타일 */
-  .AddPostsMainSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* 입력 필드 스타일 */
-  .AddPostsField {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  .AddPostsField p {
-    font-size: 1.1em;
-    margin-bottom: 5px;
-    color: #6c5c5c;
-  }
-  
-  .AddPostsField input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    box-sizing: border-box;
-  }
-  
-  .AddPostsField input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  /* 제출 버튼 스타일 */
-  .AddPostsSubmit {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .AddPostsSubmit button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .AddPostsSubmit button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* 폼 필드 간 간격 조정 */
-  .AddPostsField input::placeholder {
-    color: #aaa;
-  }
-  
+  background-color: #f9f9f9;
+  width: 50%; /* 폭을 좀 더 좁혀서 더 집중된 레이아웃 */
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  overflow: hidden;
+}
 
+/* 제목 스타일 */
+.AddPosts h2 {
+  text-align: center;
+  font-size: 2.5em; /* 제목 크기 조정 */
+  color: #4b4b4b;
+  margin-bottom: 25px;
+  font-weight: bold; /* 제목 강조 */
+}
+
+/* 입력 폼 섹션 스타일 */
+.AddPostsMainSection {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 입력 필드 스타일 */
+.AddPostsField {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.AddPostsField label {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.AddPostsField input,
+.AddPostsField textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.AddPostsField input:focus,
+.AddPostsField textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* 텍스트영역 스타일 */
+.AddPostsField textarea {
+  min-height: 150px; /* 텍스트 영역 크기 설정 */
+  resize: vertical; /* 수직으로만 리사이즈 가능 */
+}
+
+/* 제출 버튼 스타일 */
+.AddPostsSubmit {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.AddPostsSubmit button {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.3em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.AddPostsSubmit button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px); /* 버튼에 살짝 떠오르는 효과 */
+}
+
+.AddPostsSubmit button:active {
+  transform: translateY(1px); /* 클릭 시 버튼 눌리는 효과 */
+}
+
+/* 플레이스홀더 텍스트 스타일 */
+.AddPostsField input::placeholder,
+.AddPostsField textarea::placeholder {
+  color: #aaa;
+}
+
+/* 작은 화면에서 폼 너비 조정 */
+@media (max-width: 768px) {
+  .AddPosts {
+    width: 90%;
+  }
+
+  .AddPosts h2 {
+    font-size: 2em;
+  }
+
+  .AddPostsField input,
+  .AddPostsField textarea {
+    font-size: 1em;
+  }
+
+  .AddPostsSubmit button {
+    font-size: 1.1em;
+  }
+}
