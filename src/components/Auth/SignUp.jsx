@@ -71,11 +71,10 @@ const SignUp = () => {
         "http://localhost:5000/api/email/verify-code",
         { code: enteredCode }
       );
-      alert(response.data.message);
+      //alert(response.data.message);
       setIsCodeCorrect(true);
-      setIsModalOpen(false);
     } catch (error) {
-      alert("인증코드가 일치하지 않습니다.");
+      //alert("인증코드가 일치하지 않습니다.");
       setIsCodeCorrect(false);
     }
   };
