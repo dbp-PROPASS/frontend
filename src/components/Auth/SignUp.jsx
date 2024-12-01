@@ -50,19 +50,32 @@ const SignUp = () => {
   const [enteredCode, setEnteredCode] = useState('');
   const [isCodeCorrect, setIsCodeCorrect] = useState(null);
 
-  const handleEditClick = () => {
-    setIsModalOpen(true); // 모달 열기
-    setVerificationCode('1234'); // Hardcoded for example
+  const handleEditClick = async () => {
+    try {
+      await axios.post("http://localhost:5000/api/email/send-code", {
+        email: formData.email,
+      });
+      setIsModalOpen(true);
+    } catch (error) {
+      alert("이메일 발송에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  const handleVerificationSubmit = () => {
-    if (enteredCode === verificationCode) {
+  const handleVerificationSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/email/verify-code",
+        { code: enteredCode }
+      );
+      alert(response.data.message);
       setIsCodeCorrect(true);
-    } else {
+      setIsModalOpen(false);
+    } catch (error) {
+      alert("인증코드가 일치하지 않습니다.");
       setIsCodeCorrect(false);
     }
   };
