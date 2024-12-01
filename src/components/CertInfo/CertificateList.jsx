@@ -11,11 +11,6 @@ const CertificateList = ({ certificateData }) => {
 
  
   useEffect(() => {
-    if (certificateData && certificateData.length > 0) {
-      console.log('데이터가 정상적으로 로드됨:', certificateData);
-    } else {
-      console.log('데이터가 로드되지 않음');
-    }
     if (certificateData && Array.isArray(certificateData)) {
       setCertificates(certificateData); // props로 받은 데이터로 업데이트
     } else {
@@ -154,8 +149,8 @@ const CertificateList = ({ certificateData }) => {
                   key={index}
                   className="clicktr"
                   onClick={() => {
-                    console.log("전달 전체 값", cert); // `cert` 전체 값 확인
-                    navigate('/certificateInfo', { state: { certificate: cert } }); // ID만 전달
+                    console.log("전달 값", cert.CERT_NAME); // `cert` 전체 값 확인
+                    navigate(`/certificateInfo/${encodeURIComponent(cert.CERT_NAME)}`, { state: { certName: cert.CERT_NAME } }); // ID만 전달
                   }}
                 >
                   <td>{cert.CERT_NAME}</td>

@@ -18,7 +18,7 @@ const AppRoutes = ({ data }) => {
             <Route path="/" element={<StartMenu />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/certificateInfo" element={<CertificateInfo />} />
+            <Route path="/certificateInfo/:certName" element={<CertificateInfo />} />
             <Route path="/certificateList" element={<CertificateList />} />
             <Route path="/certRecommender" element={<CertRecommender />} />
             <Route path="/community" element={<Community />} />
