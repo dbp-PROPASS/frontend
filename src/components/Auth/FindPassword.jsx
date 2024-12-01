@@ -13,7 +13,7 @@ const FindPassword = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 방지
       
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
 
     if (!name) {
       alert('이름을 입력해주세요');
@@ -25,14 +25,14 @@ const FindPassword = ({ onClose }) => {
       return; 
     }
 
-    if (!emailRegex.test(email)) {
-      alert('유효한 이메일을 입력해주세요');
-      return; 
-    }
-
     if (!phone) {
       alert('전화번호를 입력해주세요');
       return; 
+    }
+
+    if (!phoneRegex.test(phone)) {
+      alert('유효한 전화번호를 입력해주세요 (형식: 000-xxxx-xxxx)');
+      return;
     }
 
     try {
