@@ -13,6 +13,8 @@ const FindPassword = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 폼 제출 방지
       
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!name) {
       alert('이름을 입력해주세요');
       return;  
@@ -20,6 +22,11 @@ const FindPassword = ({ onClose }) => {
 
     if (!email) {
       alert('이메일을 입력해주세요');
+      return; 
+    }
+
+    if (!emailRegex.test(email)) {
+      alert('유효한 이메일을 입력해주세요');
       return; 
     }
 
