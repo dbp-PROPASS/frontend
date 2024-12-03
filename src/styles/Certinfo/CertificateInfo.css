@@ -113,6 +113,7 @@
 .exam-round-table th {
   padding: 10px;
   text-align: left;
+  border: 1px solid #b6b6b6 !important;
   background-color: rgba(210, 201, 201, 0.5); /* 50% 투명도 */
   font-weight: bold;
   text-align: center;
