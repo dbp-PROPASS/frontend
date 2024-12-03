@@ -78,8 +78,8 @@ const MyCertificate = () => {
 
     const certificateData = {
       C_CERT_NAME: newCertificate.category,
-      C_EXAM_DATE: newCertificate.passDate,
-      ACQISITION_DATE: newCertificate.validityPeriod,
+      C_EXAM_DATE: formatDate(newCertificate.passDate), // 날짜 변환
+      ACQISITION_DATE: formatDate(newCertificate.validityPeriod), // 날짜 변환
       OWN_INFO: newCertificate.remarks,
       MEM_ID: mem_id,
     };
@@ -115,6 +115,10 @@ const MyCertificate = () => {
     if (mem_id) fetchCertificates();
   }, [mem_id]);
   
+  const formatDate = (dateString) => {
+    return dateString.replace(/-/g, '/'); // '-'를 '/'로 변경
+  };
+
   //자격증 수정 (업데이트)
   const handleUpdateCertificate = async () => {
     if (!newCertificate.category || !newCertificate.passDate || !newCertificate.validityPeriod) {
@@ -130,8 +134,8 @@ const MyCertificate = () => {
         body: JSON.stringify({
           id: id, // 수정할 자격증 ID
           category: newCertificate.category,
-          passDate: newCertificate.passDate,
-          validityPeriod: newCertificate.validityPeriod,
+          passDate: formatDate(newCertificate.passDate), // 날짜 변환
+          validityPeriod: formatDate(newCertificate.validityPeriod), // 날짜 변환
           remarks: newCertificate.remarks,
         }),
       });
@@ -196,8 +200,8 @@ const MyCertificate = () => {
     setCurrentId(certificate.OWNED_CERT_ID);  // 수정할 항목의 ID 저장
     setNewCertificate({
       category: certificate.C_CERT_NAME,
-      passDate: certificate.C_EXAM_DATE,
-      validityPeriod: certificate.ACQISITION_DATE,
+      passDate: certificate.C_EXAM_DATE.replace(/\//g, '-'), // 기존 '/'를 '-'로 변환
+      validityPeriod: certificate.ACQISITION_DATE.replace(/\//g, '-'), // 기존 '/'를 '-'로 변환
       remarks: certificate.OWN_INFO,
     }); // 모달에 수정할 데이터 채우기
     setIsModalOpen(true); // 모달 열기
