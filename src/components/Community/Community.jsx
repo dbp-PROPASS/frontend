@@ -1,3 +1,4 @@
+// Community.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/Community/Community.css';
@@ -12,6 +13,8 @@ const Community = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
+  const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
+
 
   const postsPerPage = 8; // 페이지당 게시글 수
   const navigate = useNavigate();
@@ -51,7 +54,7 @@ const Community = () => {
 
   // 목록 화면 렌더링
   const renderListView = () => (
-    <div className="community"><br></br><br></br><br></br><br></br><br></br><br></br> 
+    <div className="post-list-container"><br></br><br></br><br></br><br></br><br></br><br></br>
       <div className="category-select">
         <select
           value={category}
@@ -59,6 +62,7 @@ const Community = () => {
             setCategory(e.target.value);
             setCurrentPage(1);
           }}
+          className="category-dropdown"
         >
           <option value="it">IT/컴퓨터 분야</option>
           <option value="english">어학 분야</option>
@@ -71,7 +75,7 @@ const Community = () => {
           <option value="architect">건축/토목/기술 분야</option>
           <option value="national">국가 자격증 분야</option>
         </select>
-
+  
         <input
           type="text"
           placeholder="검색할 내용을 입력해주세요."
@@ -80,13 +84,13 @@ const Community = () => {
           className="search-input"
         />
       </div>
-
+  
       <div className="nav-at-Community">
-        <div className="nav-AddPosts" onClick={() => setView('write')}>
+        <div className="nav-Posts" onClick={() => setView('write')}>
           글 작성
         </div>
       </div>
-
+  
       <table className="post-table">
         <thead>
           <tr>
@@ -100,14 +104,20 @@ const Community = () => {
               post.title && post.title.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .map((post) => (
-              <tr key={post.postId} onClick={() => { setView('detail'); setSelectedPost(post); }}>
+              <tr
+                key={post.postId}
+                onClick={() => {
+                  setView('detail');
+                  setSelectedPost(post);
+                }}
+              >
                 <td>{post.title}</td>
                 <td>{post.author}</td>
               </tr>
             ))}
         </tbody>
       </table>
-
+  
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <span
@@ -121,16 +131,61 @@ const Community = () => {
       </div>
     </div>
   );
+  
 
-  // 상세보기 화면 렌더링
+
+
+
+  // 댓글 작성 핸들러 추가
+  const handleCommentSubmit = async () => {
+    if (!newComment.trim()) {
+      alert('댓글 내용을 입력하세요.');
+      return;
+    }
+
+    // 쿠키에서 이메일을 가져오기
+    const author = Cookies.get('rememberEmail');
+    if (!author) {
+      alert('로그인 정보가 없습니다.'); // 쿠키에 이메일이 없으면 알림
+      return;
+    }
+    // // formData에 author 추가
+    // const authorData = { author };
+    // const postData = { ...formData, author };
+
+    try {
+      const response = await axios.post(`http://localhost:5000/api/posts/${selectedPost.postId}/comments`, {
+        content: newComment,
+        author: author,
+      });
+
+      // 서버 응답에서 새로운 댓글 데이터를 받아와 상태 업데이트
+      const newCommentData = response.data;
+
+      // 선택된 게시글 상태 업데이트
+      setSelectedPost((prevPost) => ({
+        ...prevPost,
+        comments: [...prevPost.comments, newCommentData],
+      }));
+
+      // 댓글 작성 후 입력 필드 초기화
+      setNewComment('');
+    } catch (error) {
+      console.error('Error posting comment:', error);
+      alert('댓글 작성에 실패했습니다.');
+    }
+  };
+
+  // 기존 renderDetailView 함수와 결합해 댓글 작성 폼 추가
   const renderDetailView = () => (
-    <div className="post-detail"><br></br><br></br><br></br><br></br><br></br><br></br> 
-      <h2>{selectedPost.title}</h2>
-      <p><strong>작성자:</strong> {selectedPost.author}</p>
+    <div className="post-detail"><br></br><br></br><br></br>
+      {/* 기존 상세보기 UI */}
+      <h2 className="post-title">{selectedPost.title}</h2>
+      <p className="post-author"><strong></strong> {selectedPost.author}</p>
       <p>{selectedPost.content}</p>
 
       <div className="comments-section">
-        <h3>댓글</h3>
+        <h3 className="post-comment-name">댓글</h3>
         {selectedPost.comments.length > 0 ? (
           <ul>
             {selectedPost.comments.map((comment) => (
@@ -142,11 +197,22 @@ const Community = () => {
         ) : (
           <p>댓글이 없습니다.</p>
         )}
+        <div className="comment-form">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="댓글을 입력하세요."
+          />
+          <button onClick={handleCommentSubmit}>댓글 작성</button>
+        </div>
       </div>
 
       <button onClick={() => setView('list')}>목록으로</button>
     </div>
   );
+
+
+
 
   const categoryMap = {
     it: '2',

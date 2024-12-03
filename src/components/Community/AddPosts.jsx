@@ -1,3 +1,4 @@
+// AddPosts.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/Community/AddPosts.css';
@@ -53,7 +54,7 @@ const AddPosts = ({ currentCategory }) => {  // props로 전달받기
   };
 
   return (
-    <div className='AddPosts'><br></br><br></br><br></br><br></br><br></br><br></br> 
+    <div className='AddPosts'><br></br><br></br><br></br>
       <h2>게시글 작성</h2>
       <div className='AddPostsMainSection'>
         <form onSubmit={handleSubmit}>
@@ -109,7 +110,7 @@ const AddPosts = ({ currentCategory }) => {  // props로 전달받기
           </div> */}
 
           <div className="AddPostsSubmit">
-            <button type="submit">add Post</button>
+            <button type="submit">작성</button>
           </div>
         </form>
       </div>
