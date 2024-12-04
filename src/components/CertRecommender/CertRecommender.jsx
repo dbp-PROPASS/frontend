@@ -23,15 +23,14 @@ const CertRecommender = () => {
     }
   }, [navigate]);
 
+  // 사용자 데이터 가져오기
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const email = Cookies.get("rememberEmail");
         if (!email) throw new Error("로그인 정보가 없습니다.");
 
-        const response = await axios.get(
-          `http://localhost:5000/api/users/${email}`
-        );
+        const response = await axios.get(`http://localhost:5000/api/users/${email}`);
         const userData = response.data;
         setFormData({
           age_group: userData.age_group || "",
@@ -47,21 +46,41 @@ const CertRecommender = () => {
     fetchUserData();
   }, []);
 
+  // API에서 자격증 추천 가져오기
   useEffect(() => {
-    const mockData = {
-      "IT/컴퓨터": ["정보처리기사", "리눅스마스터", "AWS Certified Solutions Architect"],
-      "어학": ["TOEIC", "JLPT", "OPIc"],
-      "경영/회계/금융": ["CPA", "ACCA", "FRM"],
-      "건축/토목/기술": ["토목기사", "건축기사", "기계기사"],
-      "의료/보건": ["간호사", "의사", "약사"],
-      "교육/상담": ["임용고시", "상담사", "심리상담사"],
-      "공예/디자인": ["그래픽디자인", "웹디자인", "패션디자인", "그래픽디자인", "웹디자인", "패션디자인", "그래픽디자인", "웹디자인", "패션디자인", "그래픽디자인"],
-      "조리/식음료": ["바리스타", "소믈리에", "요리사"],
-      "운전/기계": ["운전면허", "자동차정비기사", "기계기사"],
-      "국가자격증": ["한국사능력검정시험", "산업안전기사", "MOS"],
+    const fetchRecommendations = async () => {
+      try {
+        const age_group = formData.age_group;
+        const interest = formData.interests[currentInterest];
+        const encodedCategory = encodeURIComponent(interest);
+
+        // 연령대별 추천 가져오기
+        const ageGroupResponse = await axios.get(
+          `http://localhost:5000/api/ageGroup/${age_group}`
+        );
+        console.log('Age group recommendations:', ageGroupResponse.data); // 디버깅 로그
+  
+        // 관심사별 추천 가져오기
+        const interestResponse = await axios.get(
+          `http://localhost:5000/api/category/${encodedCategory}`
+        );
+        console.log('Interest recommendations:', interestResponse.data); // 디버깅 로그
+  
+        // 상태 업데이트
+        setPopularCertifications(prevState => ({
+          ...prevState,
+          [age_group]: ageGroupResponse.data,
+          [interest]: interestResponse.data,
+        }));
+      } catch (error) {
+        console.error("Error fetching recommendations:", error);
+      }
     };
-    setPopularCertifications(mockData);
-  }, []);
+
+    if (formData.age_group || formData.interests.length > 0) {
+      fetchRecommendations();
+    }
+  }, [formData, currentInterest]);
 
   const handleArrowClick = (direction) => {
     if (direction === "next") {
@@ -99,7 +118,7 @@ const CertRecommender = () => {
         <div className="itemForRecommend">
           <h2 className="itemRecoTitle">{`${formData.age_group}대 인기 자격증`}</h2>
           <ul className="itemRecoList">
-            {(popularCertifications[formData.age_group] || []).map(
+            {(popularCertifications[formData.age_group] || []).flat().map(
               (certification, index) => (
                 <li key={index} className="itemRecoItem">
                   {index + 1}. {certification}
@@ -117,18 +136,18 @@ const CertRecommender = () => {
               <>
                 <button onClick={() => handleArrowClick("prev")} className="arrowButton">⬅</button>
               </>
-            )} 
+            )}
             <h2 className="itemRecoTitle">
               <span ref={titleRef}>{currentInterestField} 인기 자격증</span>
             </h2>
             {formData.interests.length > 1 && (
-            <>
-              <button onClick={() => handleArrowClick("next")} className="arrowButton">➡</button>
-            </>
-          )}
+              <>
+                <button onClick={() => handleArrowClick("next")} className="arrowButton">➡</button>
+              </>
+            )}
           </div>
           <ul className="itemRecoList">
-            {(popularCertifications[currentInterestField] || []).map(
+            {(popularCertifications[currentInterestField] || []).flat().map(
               (certification, index) => (
                 <li key={index} className="itemRecoItem">
                   {index + 1}. {certification}
