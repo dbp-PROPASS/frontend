@@ -106,20 +106,24 @@
   margin-top: 10px;
   margin-left: 1%;
   width: 36%; /* 오른쪽 패널의 폭을 전체의 36%로 설정 */
-  height: 670px;
-  background-color: #8A7968; /*배경색 설정*/
-  padding: 5px; /* 내부 여백 */
+  height: 100%;
   border-radius: 30px; /* 둥근 모서리 */
-  border: 2px solid #8A7968; /* 테두리 설정 */
   color: white;
   text-align: center;
+}
+
+.detailBox {
+  background-color: #8A7968; /*배경색 설정*/
+  padding: 12px; /* 내부 여백 */
+  border-radius: 30px; /* 둥근 모서리 */
+  border: 2px solid #8A7968; /* 테두리 설정 */
 }
 
 .detailBox2 {
   padding-top: 1%;
   padding-left: 1%;
   padding-right: 6%;
-  height: 583px;
+  height: 530px;
   background-color: white; /* 배경색 설정 */
   border-radius: 25px; /* 둥근 모서리 */
 }
@@ -155,7 +159,7 @@
 }
 
 .schedule-details button{
-  margin-top: 25px; /* 버튼 위쪽 여백 */
+  margin-top: 15px; /* 버튼 위쪽 여백 */
   padding: 12px 22px; /* 버튼 내부 여백 */
   border-radius: 15px; /* 버튼 모서리 둥글게 */
 }
@@ -167,4 +171,27 @@
   --marker-exam: #9AFFD5; /* 시험일 이벤트 배경색 */
   --marker-results: #FFFB9A; /* 발표일 이벤트 배경색 */
   --marker-expired: #FFBF9A; /*보유 자격증 만료일*/
+}
+
+/* 이벤트 색상과 의미 표시 */
+.event-legend {
+  padding-left: 4%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  gap: 15px;
+  color: #8a7968;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #8A7968; /* 테두리 추가 */
 }

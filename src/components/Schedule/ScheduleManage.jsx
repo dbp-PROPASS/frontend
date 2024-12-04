@@ -251,24 +251,47 @@ const ScheduleManage = () => {
 
       {/* 일정 세부사항 섹션 */}
       <div className="schedule-details">
-        <div className='datailBox1'>
-        <h2>{selectedDate} 일정</h2> {/* 선택된 날짜 표시 */}
+        {/* 이벤트 색상과 의미 표시 */}
+        <div className="event-legend">
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: 'var(--marker-receiveStart)' }}></div>
+            <span>시험 접수 시작</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: 'var(--marker-receiveEnd)' }}></div>
+            <span>시험 접수 마감</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: 'var(--marker-exam)' }}></div>
+            <span>시험일</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: 'var(--marker-results)' }}></div>
+            <span>발표일</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-color" style={{ backgroundColor: 'var(--marker-expired)' }}></div>
+            <span>만료일</span>
+          </div>
         </div>
-        <div className='detailBox2'>
-        <ul>
-         {getEventsForDate(selectedDate).map((event, index) => (
-            <div
-            key={index}
-            className="event-box-detail"
-            style={{
-              backgroundColor: `var(--marker-${event.type.replace(/\s/g, '-')})`,
-              marginBottom: '10px'
-            }}
-          >
-              {event.description}
-            </div>
-          ))}
-        </ul>
+        <div className='detailBox'>
+          <h2>{selectedDate} 일정</h2> {/* 선택된 날짜 표시 */}
+          <div className='detailBox2'>
+            <ul>
+              {getEventsForDate(selectedDate).map((event, index) => (
+                <div
+                key={index}
+                className="event-box-detail"
+                style={{
+                  backgroundColor: `var(--marker-${event.type.replace(/\s/g, '-')})`,
+                  marginBottom: '10px'
+                }}
+              >
+                  {event.description}
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
         <button onClick={handleTodayClick} className="today-button">
           오늘 날짜로 돌아가기
