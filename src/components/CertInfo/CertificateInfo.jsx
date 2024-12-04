@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../styles/Certinfo/CertificateInfo.css';
 import Cookies from 'js-cookie';
-import { ToastContainer, toast } from 'react-toastify';  // 추가
-import 'react-toastify/dist/ReactToastify.css';  // 스타일 추가
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CertificateInfo = () => {
   const { certName } = useParams();
@@ -12,17 +12,29 @@ const CertificateInfo = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [memId, setMemId] = useState(null);
-  const sessionEmail = Cookies.get('rememberEmail'); // 이메일을 쿠키에서 가져옴
+  const [allRounds, setAllRounds] = useState([]); // 차수 정보
+  const sessionEmail = Cookies.get('rememberEmail'); // 쿠키에서 이메일 가져오기
 
   // 자격증 정보 가져오기
   useEffect(() => {
+    console.log('certName:', certName);
     if (certName) {
       setIsLoading(true);
 
       fetch(`http://localhost:5000/api/certificate/${certName}`)
         .then((response) => response.json())
         .then((data) => {
-          setCertificate(data);
+          console.log('받은 데이터:', data); // 응답 데이터 로그 출력
+          
+          // data 자체가 배열이라면 직접 allRounds로 설정
+          const allRounds = Array.isArray(data) ? data : [];
+          setAllRounds(allRounds);
+
+          // 최신 차수 설정
+          const latestRound = allRounds[0] || null;
+          setCertificate(latestRound);
+
+          console.log('받은 allRounds 데이터:', allRounds);
         })
         .catch((error) => {
           console.error('Error fetching certificate info:', error);
@@ -40,13 +52,15 @@ const CertificateInfo = () => {
         console.error('이메일이 없습니다.');
         return;
       }
-      
+
       try {
-        const response = await fetch(`http://localhost:5000/api/bookmark/getMemId?email=${encodeURIComponent(sessionEmail)}`);
-        
+        const response = await fetch(
+          `http://localhost:5000/api/bookmark/getMemId?email=${encodeURIComponent(sessionEmail)}`
+        );
+
         if (response.ok) {
           const data = await response.json();
-          
+
           if (data.mem_id) {
             setMemId(data.mem_id);
           } else {
@@ -110,13 +124,13 @@ const CertificateInfo = () => {
         setIsBookmarked(!isBookmarked);
         if (isBookmarked) {
           toast.info('즐겨찾기가 해제되었습니다.', {
-            autoClose: 800,         // 2초 후 사라짐
-            hideProgressBar: true,  // 진행 표시줄 숨기기
+            autoClose: 800,
+            hideProgressBar: true,
           });
         } else {
           toast.success('즐겨찾기에 추가되었습니다.', {
-            autoClose: 800,         // 2초 후 사라짐
-            hideProgressBar: true,  // 진행 표시줄 숨기기
+            autoClose: 800,
+            hideProgressBar: true,
           });
         }
       })
@@ -139,7 +153,7 @@ const CertificateInfo = () => {
   return (
     <div className="certificate-info">
       <div className="header-container">
-        <h2>{certificate.CERT_NAME || '자격증 이름 없음'}</h2>
+        <h2>{certName || '자격증 이름 없음'}</h2>
       </div>
       <hr />
       <table className="totaltable">
@@ -179,15 +193,23 @@ const CertificateInfo = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{certificate.ROUND_ID || '정보 없음'}</td>
-                    <td>
-                      {certificate.RECEPTION_START_DATE || '정보 없음'} ~{' '}
-                      {certificate.RECEPTION_FINISH_DATE || '정보 없음'}
-                    </td>
-                    <td>{certificate.EXAM_DATE || '정보 없음'}</td>
-                    <td>{certificate.RESULT_DATE || '정보 없음'}</td>
-                  </tr>
+                  {allRounds.length > 0 ? (
+                    allRounds.map((round) => (
+                      <tr key={round.ROUND_ID}>
+                        <td>{round.ROUND_ID || '정보 없음'}</td>
+                        <td>
+                          {round.RECEPTION_START_DATE || '정보 없음'} ~{' '}
+                          {round.RECEPTION_FINISH_DATE || '정보 없음'}
+                        </td>
+                        <td>{round.EXAM_DATE || '정보 없음'}</td>
+                        <td>{round.RESULT_DATE || '정보 없음'}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4">차수 정보가 없습니다.</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </td>
@@ -196,7 +218,7 @@ const CertificateInfo = () => {
             <td className="exam-fee">
               <h3>응시료</h3>
               <ul>
-                <li>{certificate.FEE || '정보 없음'} 원</li>
+                <li>{allRounds[0]?.FEE || '정보 없음'} 원</li>
               </ul>
             </td>
           </tr>
@@ -204,19 +226,18 @@ const CertificateInfo = () => {
             <td className="examgood">
               <h3>합격률</h3>
               <ul>
-                <li>{certificate.PASS_RATE || '정보 없음'}%</li>
+                <li>{allRounds[0]?.PASS_RATE || '정보 없음'}%</li>
               </ul>
             </td>
           </tr>
         </tbody>
       </table>
 
-      {/* ToastContainer를 추가하여 토스트 알림이 표시될 수 있도록 설정 */}
       <ToastContainer
-       position="top-right"  // 오른쪽 상단
-       style={{
-         top: '100px',  // 기본 위치에서 조금 더 위로 이동
-       }}
+        position="top-right"
+        style={{
+          top: '100px', // 기본 위치에서 조금 더 위로 이동
+        }}
       />
     </div>
   );

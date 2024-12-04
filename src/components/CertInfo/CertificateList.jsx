@@ -14,8 +14,9 @@ const CertificateList = ({ certificateData }) => {
     if (certificateData && Array.isArray(certificateData)) {
       setCertificates(certificateData); // props로 받은 데이터로 업데이트
     } else {
-      fetch('http://localhost:5000/api/certificate')  
-        .then(response => {
+      fetch('http://localhost:5000/api/certificate')
+  .then(response => {
+    console.log('Response status:', response.status); // 응답 상태 코드 출력
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
