@@ -298,3 +298,31 @@
   background-color: #f9f9f9; /* 배경색을 추가해 구분감 추가 */
   padding-top: 10px;
 }
+
+
+/* AddPostsBack 스타일 */
+.AddPostsBack {
+  position: absolute; /* 위치를 고정 */
+  top: 110px; /* 상단에서 10px 간격 */
+  left: 20px; /* 왼쪽에서 10px 간격 */
+}
+
+.AddPostsBack button {
+  background-color: #8A7968; /* 버튼 배경색 */
+  color: white; /* 글자 색 */
+  font-size: 12px; /* 글자 크기를 작게 */
+  padding: 5px 10px; /* 안쪽 여백을 줄임 */
+  border: none; /* 테두리 제거 */
+  border-radius: 3px; /* 둥근 모서리 */
+  cursor: pointer; /* 마우스 포인터 변경 */
+  transition: background-color 0.3s, transform 0.2s; /* 호버 효과 */
+}
+
+.AddPostsBack button:hover {
+  background-color: #6D5F4D; /* 호버 시 더 진한 색상 */
+}
+
+.AddPostsBack button:active {
+  background-color: #4E463C; /* 클릭 시 더 어두운 색상 */
+  transform: scale(0.95); /* 약간 축소 */
+}

@@ -230,7 +230,7 @@ const Community = () => {
   return view === 'list'
     ? renderListView()
     : view === 'write'
-    ? <AddPosts currentCategory={categoryMap[category]} />
+    ? <AddPosts currentCategory={categoryMap[category]}  setView={setView} />
     : view === 'detail'
     ? renderDetailView()
     : null;

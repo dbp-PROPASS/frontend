@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../styles/Community/AddPosts.css';
 import Cookies from 'js-cookie'; // 쿠키에서 값을 가져오기 위한 js-cookie import
 
-const AddPosts = ({ currentCategory }) => {  // props로 전달받기
+const AddPosts = ({ currentCategory, setView }) => {  // props로 전달받기
   const [formData, setFormData] = useState({
     title: '',
     content: '',
@@ -47,6 +47,7 @@ const AddPosts = ({ currentCategory }) => {  // props로 전달받기
       const response = await axios.post('http://localhost:5000/api/addPost', postData);
       alert(response.data.message); // 서버에서 받은 메시지 출력
       setFormData({ title: '', content: '', comId: currentCategory }); // 폼 초기화
+      setView('list'); // 게시글 작성 후 목록 화면으로 이동
     } catch (err) {
       console.error('요청 실패:', err.response || err.message);
       alert('게시글 작성에 실패하였습니다.');
@@ -55,6 +56,7 @@ const AddPosts = ({ currentCategory }) => {  // props로 전달받기
 
   return (
     <div className='AddPosts'><br></br><br></br><br></br>
+    
       <h2>게시글 작성</h2>
       <div className='AddPostsMainSection'>
         <form onSubmit={handleSubmit}>
@@ -112,7 +114,12 @@ const AddPosts = ({ currentCategory }) => {  // props로 전달받기
           <div className="AddPostsSubmit">
             <button type="submit">작성</button>
           </div>
+          <div className="AddPostsBack">
+            <button onClick={() => setView('list')}>이전</button> {/* 이전 버튼 추가 */}
+          </div>
         </form>
+
+
       </div>
     </div>
   );
