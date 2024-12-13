@@ -164,14 +164,27 @@
   border-radius: 15px; /* 버튼 모서리 둥글게 */
 }
 
-/* 일정 색상*/
+/* 일정 색상 */
 :root {
-  --marker-receiveStart: #9AC8FF; /* 접수 시작 이벤트 배경색 */
-  --marker-receiveEnd: #FF9A9A; /* 접수 마감 이벤트 배경색 */
-  --marker-exam: #9AFFD5; /* 시험일 이벤트 배경색 */
-  --marker-results: #FFFB9A; /* 발표일 이벤트 배경색 */
-  --marker-expired: #FFBF9A; /*보유 자격증 만료일*/
+  --marker-receiveStart: #9AC8FF;
+  --marker-receiveEnd: #FF9A9A;
+  --marker-exam: #9AFFD5;
+  --marker-results: #FFFB9A;
+  --marker-expired: #FFBF9A;
+
+  /* 필기 이벤트 색상 */
+  --marker-writtenReceiveStart: #D1E8FF;
+  --marker-writtenReceiveEnd: #FFA5A5;
+  --marker-writtenResults: #FFD69A;
+  --marker-writtenExam: #A5FFBA;
+
+  /* 실기 이벤트 색상 */
+  --marker-practicalReceiveStart: #C7D3FF;
+  --marker-practicalReceiveEnd: #FFA7A7;
+  --marker-practicalResults: #FFF5A3;
+  --marker-practicalExam: #A3FFCE;
 }
+
 
 /* 이벤트 색상과 의미 표시 */
 .event-legend {

@@ -95,62 +95,90 @@ const ScheduleManage = () => {
 
   // 특정 날짜에 해당하는 이벤트를 필터링하는 함수
   const getEventsForDate = (date) => {
-    return calendarData
-      .filter(event => event.date === date)
-      .map(event => {
-        let description;
+  return calendarData
+    .filter(event => event.date === date)
+    .map(event => {
+      let description;
 
-        switch (event.type) {
-          case 'expired':
-            description = (
-              <>
-                {event.certName} <br /> 만료일
-              </>
-            );
-            break;
-          case 'exam':
-            description = (
-              <>
-                {event.certName} <br /> 시험일
-              </>
-            );
-            break;
-          case 'receiveStart':
-            description = (
-              <>
-                {event.certName} <br /> 접수 시작일
-              </>
-            );
-            break;
-          case 'receiveEnd':
-            description = (
-              <>
-                {event.certName} <br /> 접수 마감일
-              </>
-            );
-            break;
-          case 'results':
-            description = (
-              <>
-                {event.certName} <br /> 결과 발표일
-              </>
-            );
-            break;
-          default:
-            description = (
-              <>
-                {event.certName} <br /> {event.type}
-              </>
-            );
-        }
+      switch (event.type) {
+        case 'expired':
+          description = (
+            <>
+              {event.certName} <br /> 만료일
+            </>
+          );
+          break;
+        case 'writtenReceiveStart':
+          description = (
+            <>
+              {event.certName} <br /> 필기 접수 시작일
+            </>
+          );
+          break;
+        case 'writtenReceiveEnd':
+          description = (
+            <>
+              {event.certName} <br /> 필기 접수 마감일
+            </>
+          );
+          break;
+        case 'writtenResults':
+          description = (
+            <>
+              {event.certName} <br /> 필기 결과 발표일
+            </>
+          );
+          break;
+        case 'writtenExam':
+          description = (
+            <>
+              {event.certName} <br /> 필기 시험일
+            </>
+          );
+          break;
+        case 'practicalReceiveStart':
+          description = (
+            <>
+              {event.certName} <br /> 실기 접수 시작일
+            </>
+          );
+          break;
+        case 'practicalReceiveEnd':
+          description = (
+            <>
+              {event.certName} <br /> 실기 접수 마감일
+            </>
+          );
+          break;
+        case 'practicalResults':
+          description = (
+            <>
+              {event.certName} <br /> 실기 결과 발표일
+            </>
+          );
+          break;
+        case 'practicalExam':
+          description = (
+            <>
+              {event.certName} <br /> 실기 시험일
+            </>
+          );
+          break;
+        default:
+          description = (
+            <>
+              {event.certName} <br /> {event.type}
+            </>
+          );
+      }
 
-        return {
+      return {
+        description: description,
+        type: event.type
+      };
+    });
+};
 
-          description: description,
-          type: event.type
-        };
-      });
-  };
 
   const handleTodayClick = () => {
     const today = new Date();
