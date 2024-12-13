@@ -186,6 +186,7 @@ const CertificateInfo = () => {
               <table className="exam-round-table">
                 <thead>
                   <tr>
+                    <th>구분</th>
                     <th>차수</th>
                     <th>접수 기간</th>
                     <th>시험 일자</th>
@@ -196,6 +197,7 @@ const CertificateInfo = () => {
                   {allRounds.length > 0 ? (
                     allRounds.map((round) => (
                       <tr key={round.ROUND_ID}>
+                        <td>{round.EXAM_TYPE || '정보 없음'}</td>
                         <td>{round.ROUND_ID || '정보 없음'}</td>
                         <td>
                           {round.RECEPTION_START_DATE || '정보 없음'} ~{' '}
