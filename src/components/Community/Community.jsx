@@ -164,7 +164,7 @@ const Community = () => {
   // 댓글 작성 핸들러 추가
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) {
-      alert('작성한 글들은 정보 공유를 위해 삭제가 불가능하니, 신중하게 작성하시길 바랍니다.');
+      alert('댓글 내용을 입력하세요.');
       return;
     }
 
@@ -226,12 +226,12 @@ const Community = () => {
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="댓글을 입력하세요."
+            placeholder="작성한 글들은 정보 공유를 위해 삭제가 불가능하니, 신중하게 작성하시길 바랍니다."
           />
           <button onClick={handleCommentSubmit}>댓글 작성</button>
         </div>
 
-        <LargeAdBanner />
+        
       </div>
 
       <button
@@ -243,6 +243,7 @@ const Community = () => {
         목록으로
       </button>
 
+      <LargeAdBanner />
     </div>
   );
 
