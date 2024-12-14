@@ -5,6 +5,7 @@ import '../../styles/Community/Community.css';
 import AddPosts from './AddPosts'; // AddPosts 컴포넌트 임포트
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import LargeAdBanner from './LargeAdBanner';
 
 const Community = () => {
   const [view, setView] = useState('list'); // List/Write/Detail 상태 관리
@@ -51,8 +52,8 @@ const Community = () => {
     <div className="popup-overlay">
       <div className="popup">
         <h2>광고</h2>
-        <p>토익1타 방학강좌 수강료 최대 35% 지원</p>
-        <p>지금 할인받고 수강하기</p>
+        <p>토익1타 방학강좌 수강료 최대 35% 지원<br></br>지금 할인받고 수강하기<br></br>
+        ▼▼▼▼▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <div className="popup-buttons">
           <button
             onClick={() => window.open('https://www.hackers.co.kr/', '_blank')}
@@ -150,6 +151,9 @@ const Community = () => {
           </span>
         ))}
       </div>
+
+      {/* 광고 배너 추가 */}
+      <LargeAdBanner />
     </div>
   );
   
@@ -226,6 +230,8 @@ const Community = () => {
           />
           <button onClick={handleCommentSubmit}>댓글 작성</button>
         </div>
+
+        <LargeAdBanner />
       </div>
 
       <button
