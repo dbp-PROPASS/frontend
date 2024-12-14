@@ -207,7 +207,15 @@ const Community = () => {
         </div>
       </div>
 
-      <button onClick={() => setView('list')}>목록으로</button>
+      <button
+        onClick={() => {
+          setView('list'); // 상태를 먼저 변경
+          window.location.reload(); // 새로고침 실행
+        }}
+      >
+        목록으로
+      </button>
+
     </div>
   );
 

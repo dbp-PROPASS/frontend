@@ -48,6 +48,7 @@ const AddPosts = ({ currentCategory, setView }) => {  // props로 전달받기
       alert(response.data.message); // 서버에서 받은 메시지 출력
       setFormData({ title: '', content: '', comId: currentCategory }); // 폼 초기화
       setView('list'); // 게시글 작성 후 목록 화면으로 이동
+      window.location.reload(); // 새로고침 실행
     } catch (err) {
       console.error('요청 실패:', err.response || err.message);
       alert('게시글 작성에 실패하였습니다.');
@@ -115,7 +116,14 @@ const AddPosts = ({ currentCategory, setView }) => {  // props로 전달받기
             <button type="submit">작성</button>
           </div>
           <div className="AddPostsBack">
-            <button onClick={() => setView('list')}>이전</button> {/* 이전 버튼 추가 */}
+          <button
+            onClick={() => {
+              setView('list'); // 상태를 먼저 변경
+              window.location.reload(); // 새로고침 실행
+            }}
+          >
+            이전
+          </button> {/* 이전 버튼 추가 */}
           </div>
         </form>
 
