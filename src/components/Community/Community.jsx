@@ -16,6 +16,8 @@ const Community = () => {
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
   const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
   const [showPopup, setShowPopup] = useState(true); // 팝업 상태 추가
+  const [commentCount, setCommentCount] = useState(0);  // 댓글 개수 상태
+  const [points, setPoints] = useState(0);  // 포인트 상태
 
 
   const postsPerPage = 8; // 페이지당 게시글 수
@@ -28,6 +30,34 @@ const Community = () => {
       alert("로그인이 필요합니다.");
       navigate('/login'); // 로그인 페이지로 이동
     }
+  }, [navigate]);
+
+  // 댓글 개수와 포인트 계산
+  useEffect(() => {
+    const fetchCommentCount = async () => {
+      try {
+        const author = Cookies.get('rememberEmail');  // 로그인한 사용자의 이메일
+
+        if (!author) {
+          alert('로그인 정보가 없습니다.');
+          navigate('/login');
+          return;
+        }
+
+        // API에서 댓글 개수 가져오기
+        const response = await axios.get('http://localhost:5000/api/comments/count', {
+          params: { author },
+        });
+
+        const count = response.data.count;  // 댓글 개수
+        setCommentCount(count);
+        setPoints(count);  // 댓글 개수에 맞춰 포인트 설정 (예: 댓글 1개당 1포인트)
+      } catch (error) {
+        console.error('댓글 개수 가져오기 실패:', error);
+      }
+    };
+
+    fetchCommentCount();
   }, [navigate]);
   
   // 데이터 가져오기
@@ -111,6 +141,13 @@ const Community = () => {
         <div className="nav-Posts" onClick={() => setView('write')}>
           글 작성
         </div>
+
+        <div className="points-display">
+          <span>내 포인트: {points}</span>
+          <span> (댓글 1개당 1포인트)</span>  {/* 추가적인 텍스트 */}
+          {/*<button onClick={() => navigate('/points')}>내 포인트 보러가기</button>*/}
+        </div>
+
       </div>
   
       <table className="post-table">
