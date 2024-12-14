@@ -14,6 +14,7 @@ const Community = () => {
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
   const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
+  const [showPopup, setShowPopup] = useState(true); // 팝업 상태 추가
 
 
   const postsPerPage = 8; // 페이지당 게시글 수
@@ -45,6 +46,25 @@ const Community = () => {
     fetchPosts();
   }, [category]); // 카테고리 변경 시 API 호출
 
+   // 팝업 렌더링 함수
+   const renderPopup = () => (
+    <div className="popup-overlay">
+      <div className="popup">
+        <h2>광고</h2>
+        <p>토익1타 방학강좌 수강료 최대 35% 지원</p>
+        <p>지금 할인받고 수강하기</p>
+        <div className="popup-buttons">
+          <button
+            onClick={() => window.open('https://www.hackers.co.kr/', '_blank')}
+          >
+            지금 바로 이동
+          </button>
+          <button onClick={() => setShowPopup(false)}>닫기</button>
+        </div>
+      </div>
+    </div>
+  );
+
   // 페이지네이션 계산
   const totalPages = Math.ceil(postsData.length / postsPerPage);
   const paginatedPosts = postsData.slice(
@@ -55,6 +75,7 @@ const Community = () => {
   // 목록 화면 렌더링
   const renderListView = () => (
     <div className="post-list-container"><br></br><br></br><br></br><br></br><br></br><br></br>
+      {showPopup && renderPopup()} {/* 팝업 조건부 렌더링 */}
       <div className="category-select">
         <select
           value={category}
