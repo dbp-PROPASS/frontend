@@ -9,14 +9,12 @@ const CertificateList = ({ certificateData }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
- 
   useEffect(() => {
     if (certificateData && Array.isArray(certificateData)) {
       setCertificates(certificateData); // props로 받은 데이터로 업데이트
     } else {
       fetch('http://localhost:5000/api/certificate')
-  .then(response => {
-    console.log('Response status:', response.status); // 응답 상태 코드 출력
+        .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -34,7 +32,18 @@ const CertificateList = ({ certificateData }) => {
         });
     }
   }, [certificateData]);
-  
+
+  // 중복된 자격증을 제거하는 로직
+  const removeDuplicates = (data) => {
+    const uniqueMap = new Map();
+    data.forEach(cert => {
+      const key = `${cert.ROUND_ID}-${cert.EXAM_TYPE}`; // 복합키를 사용하여 중복 제거
+      if (!uniqueMap.has(key)) {
+        uniqueMap.set(key, cert);
+      }
+    });
+    return Array.from(uniqueMap.values());
+  };
 
   const indexOfLastCertificate = currentPage * certificatesPerPage;
   const indexOfFirstCertificate = indexOfLastCertificate - certificatesPerPage;
@@ -44,9 +53,11 @@ const CertificateList = ({ certificateData }) => {
     cert.CERT_NAME && cert.CERT_NAME.toLowerCase().includes(searchTerm.toLowerCase()) // name이 없을 경우 처리
   );
 
-  const currentCertificates = filteredCertificates.slice(indexOfFirstCertificate, indexOfLastCertificate);
+  // 중복을 제거한 인증서 목록
+  const uniqueCertificates = removeDuplicates(filteredCertificates);
 
-  const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage);
+  const currentCertificates = uniqueCertificates.slice(indexOfFirstCertificate, indexOfLastCertificate);
+  const totalPages = Math.ceil(uniqueCertificates.length / certificatesPerPage);
 
   const getPaginationRange = () => {
     const range = [];
@@ -68,7 +79,6 @@ const CertificateList = ({ certificateData }) => {
 
   const handleNextPage = () => {
     const pagesPerGroup = 3;
-    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage);
     const totalGroups = Math.ceil(totalPages / pagesPerGroup);
     const currentGroup = Math.ceil(currentPage / pagesPerGroup);
 
@@ -93,10 +103,8 @@ const CertificateList = ({ certificateData }) => {
   const isPreviousButtonVisible = currentPage > 3;
 
   const isNextButtonVisible = () => {
-    const pagesPerGroup = 3;
-    const totalPages = Math.ceil(filteredCertificates.length / certificatesPerPage);
-    const totalGroups = Math.ceil(totalPages / pagesPerGroup);
-    const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+    const totalGroups = Math.ceil(totalPages / 3);
+    const currentGroup = Math.ceil(currentPage / 3);
 
     return currentGroup < totalGroups;
   };
@@ -108,11 +116,11 @@ const CertificateList = ({ certificateData }) => {
 
   const handleSearchSubmit = () => {
     const selectedCertificate = filteredCertificates.find(cert =>
-      cert.CERT_NAME.toLowerCase() === searchTerm.toLowerCase()
+      cert.CERT_NAME.trim().toLowerCase() === searchTerm.trim().toLowerCase()
     );
 
     if (selectedCertificate) {
-      navigate('/certificateInfo', { state: { certificate: selectedCertificate } });
+      navigate(`/certificateInfo/${encodeURIComponent(selectedCertificate.CERT_NAME)}`, { state: { certName: selectedCertificate.CERT_NAME } });
     } else {
       alert('검색한 자격증을 찾을 수 없습니다.');
     }
@@ -139,26 +147,24 @@ const CertificateList = ({ certificateData }) => {
             <tr>
               <th>이름</th>
               <th>차수</th>
-              <th>응시료</th>
+              <th>기관</th>
               <th>분야</th>
             </tr>
           </thead>
           <tbody>
             {currentCertificates.length > 0 ? (
-              currentCertificates.map((cert, index) => (
+              currentCertificates.map((cert) => (
                 <tr
-                  key={index}
+                  key={`${cert.ROUND_ID}-${cert.EXAM_TYPE}`} // 복합키를 이용한 고유한 key
                   className="clicktr"
                   onClick={() => {
-                    console.log("전달 값", cert.CERT_NAME); // `cert` 전체 값 확인
-                    navigate(`/certificateInfo/${encodeURIComponent(cert.CERT_NAME)}`, { state: { certName: cert.CERT_NAME } }); // ID만 전달
+                    navigate(`/certificateInfo/${encodeURIComponent(cert.CERT_NAME)}`, { state: { certName: cert.CERT_NAME } });
                   }}
                 >
                   <td>{cert.CERT_NAME}</td>
                   <td>{cert.ROUND_ID}</td>
-                  <td>{cert.FEE}</td>
+                  <td>{cert.CERT_ORG}</td>
                   <td>{cert.CATEGORY}</td>  
-                                  
                 </tr>
               ))
             ) : (

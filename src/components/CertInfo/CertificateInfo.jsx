@@ -196,7 +196,7 @@ const CertificateInfo = () => {
                 <tbody>
                   {allRounds.length > 0 ? (
                     allRounds.map((round) => (
-                      <tr key={round.ROUND_ID}>
+                      <tr key={`${round.ROUND_ID}-${round.EXAM_TYPE}`}>
                         <td>{round.EXAM_TYPE || '정보 없음'}</td>
                         <td>{round.ROUND_ID || '정보 없음'}</td>
                         <td>
@@ -209,7 +209,7 @@ const CertificateInfo = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="4">차수 정보가 없습니다.</td>
+                      <td colSpan="5">차수 정보가 없습니다.</td>
                     </tr>
                   )}
                 </tbody>
@@ -220,7 +220,8 @@ const CertificateInfo = () => {
             <td className="exam-fee">
               <h3>응시료</h3>
               <ul>
-                <li>{allRounds[0]?.FEE || '정보 없음'} 원</li>
+                <li>필기 : {allRounds[0]?.WRITTEN_FEE   || '-'} 원</li>
+                <li>실기 : {allRounds[0]?.PRACTICAL_FEE  || '-'} 원</li>
               </ul>
             </td>
           </tr>
@@ -228,7 +229,8 @@ const CertificateInfo = () => {
             <td className="examgood">
               <h3>합격률</h3>
               <ul>
-                <li>{allRounds[0]?.PASS_RATE || '정보 없음'}%</li>
+                <li>필기 : {allRounds[0]?.WRITTEN_PASS_RATE || '-'}%</li>
+                <li>실기 : {allRounds[0]?.PRACTICAL_PASS_RATE || '-'}%</li>
               </ul>
             </td>
           </tr>

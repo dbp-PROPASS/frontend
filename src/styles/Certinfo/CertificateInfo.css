@@ -71,7 +71,7 @@
 
 .certificate-info table td {
   width: 60%;
-  padding: 3px;
+  padding: 2px;
   font-size: 16px;
   text-align: left;
 }
@@ -175,6 +175,7 @@
   background-color: rgba(210, 201, 201, 0.5); /* 배경색에 투명도 적용 */
   width: 42%;
   padding: 10px;
+  white-space: nowrap !important;
   border-radius: 10px;
 }
 
