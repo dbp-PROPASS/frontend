@@ -7,12 +7,3 @@ body, html {
   padding: 0;
   background-color: #f7f7f7;
 }
-
-/* 나중에 지울 코드. (화면 정중앙 배치 방법)*/
-h1 {
-  margin: 0;
-  height: 100vh; /* 화면 전체 높이 */
-  display: flex;
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center;
-}
