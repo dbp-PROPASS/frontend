@@ -73,11 +73,48 @@
     overflow-y: auto; /* 내용이 넘치면 스크롤 활성화 */
     height: calc(100% - 90px);
   }
-  
-  .itemRecoListItem {
-    font-size: 15px;
+
+  .itemRecoList li {
+    color: #4e4e4e;
+    font-weight: bolder;
+    font-size: 1.5rem;
     padding: 5px 0;
     color: #333;
     text-align: left;
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 0; /* 처음엔 보이지 않음 */
+      transform: translateY(20px); /* 아래에서 시작 */
+    }
+    100% {
+      opacity: 1; /* 점점 나타남 */
+      transform: translateY(0); /* 제자리 */
+    }
+  }
+  
+  /* ul 요소에서 li 태그의 애니메이션 스타일 */
+  .itemRecoList li {
+    animation: slideUp 0.5s ease-out; /* 0.5초 동안 애니메이션 실행 */
+    animation-fill-mode: forwards; /* 애니메이션이 끝난 후 상태 유지 */
+    opacity: 0; /* 초기 상태에서 보이지 않도록 설정 */
+  }
+  
+  /* 각 li에 딜레이를 적용 (순차적으로 올라오도록 설정) */
+  .itemRecoList li:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .itemRecoList li:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .itemRecoList li:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  .itemRecoList li:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  .itemRecoList li:nth-child(5) {
+    animation-delay: 1.0s;
   }
   
