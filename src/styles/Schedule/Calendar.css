@@ -190,10 +190,11 @@
 .event-legend {
   padding-left: 4%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 20px;
   gap: 15px;
   color: #8a7968;
+  white-space: nowrap;
 }
 
 .legend-item {
