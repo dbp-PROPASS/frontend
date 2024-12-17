@@ -190,8 +190,16 @@ const SignUp = () => {
             {isCodeCorrect === false && <h5 style={{ color: 'red' }}>인증코드가 일치하지 않습니다.</h5>}
             {isCodeCorrect === true && <h5 style={{ color: 'green' }}>인증 성공!</h5>}
             <div className="signup-modalButtons">
-              <button onClick={handleVerificationSubmit}>확인</button>
-              <button onClick={handleModalClose}>닫기</button>
+              {isCodeCorrect === true ? (
+                // 인증 성공 시 닫기 버튼만 표시
+                <button onClick={handleModalClose}>닫기</button>
+              ) : (
+                // 인증 성공이 아닐 때 확인 및 닫기 버튼 표시
+                <>
+                  <button onClick={handleVerificationSubmit}>확인</button>
+                  <button onClick={handleModalClose}>닫기</button>
+                </>
+              )}
             </div>
           </div>
         </div>
