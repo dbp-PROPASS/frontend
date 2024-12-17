@@ -55,6 +55,10 @@
     position: relative;
   }
 
+  .signUpselectWrapper select {
+    text-align: center;
+  } 
+
   .selectedInterests {
     display: flex;
     flex-wrap: wrap;

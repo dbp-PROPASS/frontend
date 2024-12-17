@@ -47,7 +47,11 @@
   
   .editProfileselectWrapper {
     position: relative;
-  }
+  } 
+  
+  .editProfileselectWrapper select {
+    text-align: center;
+  } 
 
   .editProfileselectedInterests {
     display: flex;
