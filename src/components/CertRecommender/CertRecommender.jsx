@@ -121,7 +121,7 @@ const CertRecommender = () => {
             {(popularCertifications[formData.age_group] || []).flat().map(
               (certification, index) => (
                 <li key={index} className="itemRecoItem">
-                  {index + 1}. {certification}
+                  Top {index + 1}.&emsp;{certification}
                 </li>
               )
             )}
@@ -150,7 +150,7 @@ const CertRecommender = () => {
             {(popularCertifications[currentInterestField] || []).flat().map(
               (certification, index) => (
                 <li key={index} className="itemRecoItem">
-                  {index + 1}. {certification}
+                  Top {index + 1}.&emsp;{certification}
                 </li>
               )
             )}

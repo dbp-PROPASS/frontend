@@ -30,7 +30,6 @@ const Navbar = () => {
     <div className="nav">
       <div className="nav-startMenu" onClick={() => navigate('/')}>PROPASS</div>
       <ul className="nav-menu">
-        <li className="nav-schedule" onClick={() => navigate('/scheduleManage')}>일정 관리</li>
         <li className="nav-certList" onClick={() => navigate('/certificateList')}>자격증 검색</li>
         <li className="nav-certRecommender" onClick={() => navigate('/certRecommender')}>자격증 추천</li>
         <li className="nav-community" onClick={() => navigate('/community')}>커뮤니티</li>

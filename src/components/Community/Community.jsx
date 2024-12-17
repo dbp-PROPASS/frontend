@@ -5,6 +5,8 @@ import '../../styles/Community/Community.css';
 import AddPosts from './AddPosts'; // AddPosts 컴포넌트 임포트
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import LargeAdBanner from './LargeAdBanner';
+import messagesByPrice from './messages';
 
 const Community = () => {
   const [view, setView] = useState('list'); // List/Write/Detail 상태 관리
@@ -14,7 +16,11 @@ const Community = () => {
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
   const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
-
+  const [showPopup, setShowPopup] = useState(true); // 광고 팝업 상태
+  const [commentCount, setCommentCount] = useState(0);  // 댓글 개수 상태
+  const [points, setPoints] = useState(0);  // 포인트 상태
+  const [popupMessage, setPopupMessage] = useState(null); // 상품 구매 팝업 메시지 상태
+  const [isPopupOpen, setIsPopupOpen] = useState(false);  // 상품 구매 팝업창 상태
 
   const postsPerPage = 8; // 페이지당 게시글 수
   const navigate = useNavigate();
@@ -27,7 +33,34 @@ const Community = () => {
       navigate('/login'); // 로그인 페이지로 이동
     }
   }, [navigate]);
-  
+
+  useEffect(() => {
+    const fetchCommentCount = async () => {
+      try {
+        const author = Cookies.get('rememberEmail');  // 로그인한 사용자의 이메일
+
+        if (!author) {
+          alert('로그인 정보가 없습니다.');
+          navigate('/login');
+          return;
+        }
+
+        // API에서 댓글 개수 가져오기
+        const response = await axios.get('http://localhost:5000/api/comments/count', {
+          params: { author },
+        });
+
+        const count = response.data.count;  // 댓글 개수
+        setCommentCount(count);
+        setPoints(count);  // 댓글 개수에 맞춰 포인트 설정 (예: 댓글 1개당 1포인트)
+      } catch (error) {
+        console.error('댓글 개수 가져오기 실패:', error);
+      }
+    };
+
+    fetchCommentCount();
+  }, [navigate]);
+
   // 데이터 가져오기
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,16 +78,99 @@ const Community = () => {
     fetchPosts();
   }, [category]); // 카테고리 변경 시 API 호출
 
-  // 페이지네이션 계산
-  const totalPages = Math.ceil(postsData.length / postsPerPage);
-  const paginatedPosts = postsData.slice(
-    (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
+  // 광고 팝업 렌더링 함수
+  const renderAdPopup = () => (
+    showPopup && (
+      <div className="popup-overlay">
+        <div className="popup">
+          <h2>광고</h2>
+          <p>
+            토익1타 방학강좌 수강료 최대 35% 지원
+            <br />
+            지금 할인받고 수강하기
+            <br />
+            ▼▼▼▼▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+          <div className="popup-buttons">
+            <button
+              onClick={() => window.open('https://www.hackers.co.kr/', '_blank')}
+            >
+              지금 바로 이동
+            </button>
+            <button onClick={() => setShowPopup(false)}>닫기</button>
+          </div>
+        </div>
+      </div>
+    )
   );
+
+   // 페이지네이션 계산
+   const totalPages = Math.ceil(postsData.length / postsPerPage);
+   const paginatedPosts = postsData.slice(
+     (currentPage - 1) * postsPerPage,
+     currentPage * postsPerPage
+   );
+
+  // 상품 구매 핸들러
+  const handlePurchase = (product) => {
+    if (points >= product.price) {
+      // 포인트 차감
+      setPoints((prevPoints) => prevPoints - product.price);
+
+      
+
+      // 랜덤 메시지 선택 (해당 가격의 메시지 중 하나)
+      const randomMessage = messagesByPrice[product.price]?.[
+        Math.floor(Math.random() * messagesByPrice[product.price].length)
+      ];
+
+      setPopupMessage(randomMessage || "감사합니다! 좋은 하루 보내세요!"); // 메시지 저장
+      setIsPopupOpen(true); // 팝업창 열기
+    } else {
+      alert("포인트가 부족합니다.");
+    }
+  };
+
+// 상품 구매 팝업 컴포넌트
+const PurchasePopup = ({ message, onClose }) => (
+  <div className="popup-overlay">
+    <div className="popup">
+      <h2>💯 오늘도 파이팅! 😄</h2>
+      <p>{message}</p>
+      <button onClick={onClose}>닫기</button>
+    </div>
+  </div>
+);
+
+const closePopup = () => {
+  setIsPopupOpen(false); // 팝업창 닫기
+};
+
+const renderPurchaseSection = () => (
+  <div className="purchase-section">
+    <h3>포인트 쇼핑</h3>
+    <ul className="product-list">
+      {[
+        { id: 1, name: "오늘의 운세", price: 5 },
+        { id: 2, name: "오늘의 공부법", price: 10 },
+        { id: 3, name: "인생의 꿀팁", price: 15 },
+      ].map((product) => (
+        <li key={product.id} className="product-item">
+          <span>{product.name}</span>
+          <span>{product.price} 포인트</span>
+          <button onClick={() => handlePurchase(product)}>구매하기</button>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 
   // 목록 화면 렌더링
   const renderListView = () => (
     <div className="post-list-container"><br></br><br></br><br></br><br></br><br></br><br></br>
+      {renderAdPopup()} {/* 광고 팝업 조건부 렌더링 */}
+
       <div className="category-select">
         <select
           value={category}
@@ -75,7 +191,7 @@ const Community = () => {
           <option value="architect">건축/토목/기술 분야</option>
           <option value="national">국가 자격증 분야</option>
         </select>
-  
+
         <input
           type="text"
           placeholder="검색할 내용을 입력해주세요."
@@ -84,13 +200,17 @@ const Community = () => {
           className="search-input"
         />
       </div>
-  
+
       <div className="nav-at-Community">
         <div className="nav-Posts" onClick={() => setView('write')}>
           글 작성
         </div>
+
+        
       </div>
-  
+
+      
+
       <table className="post-table">
         <thead>
           <tr>
@@ -117,7 +237,7 @@ const Community = () => {
             ))}
         </tbody>
       </table>
-  
+
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <span
@@ -129,12 +249,18 @@ const Community = () => {
           </span>
         ))}
       </div>
+
+      
+      {renderPurchaseSection()} {/* 상품 구매 섹션 */}
+      <div className="points-display">
+          <span>내 포인트: {points}</span>
+          <span> (댓글 1개당 1포인트)</span>
+      </div>
+      <LargeAdBanner />
+
+      {isPopupOpen && <PurchasePopup message={popupMessage} onClose={closePopup} />} {/* 상품 구매 팝업 */}
     </div>
   );
-  
-
-
-
 
   // 댓글 작성 핸들러 추가
   const handleCommentSubmit = async () => {
@@ -176,7 +302,6 @@ const Community = () => {
     }
   };
 
-  // 기존 renderDetailView 함수와 결합해 댓글 작성 폼 추가
   const renderDetailView = () => (
     <div className="post-detail"><br></br><br></br><br></br>
       {/* 기존 상세보기 UI */}
@@ -201,18 +326,26 @@ const Community = () => {
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="댓글을 입력하세요."
+            placeholder="작성한 글들은 정보 공유를 위해 삭제가 불가능하니, 신중하게 작성하시길 바랍니다."
           />
           <button onClick={handleCommentSubmit}>댓글 작성</button>
         </div>
+
+        
       </div>
 
-      <button onClick={() => setView('list')}>목록으로</button>
+      <button
+        onClick={() => {
+          setView('list'); // 상태를 먼저 변경
+          window.location.reload(); // 새로고침 실행
+        }}
+      >
+        목록으로
+      </button>
+
+      <LargeAdBanner />
     </div>
   );
-
-
-
 
   const categoryMap = {
     it: '2',

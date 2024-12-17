@@ -40,23 +40,40 @@
 /* 네비게이션 - 글 작성 버튼 */
 .nav-at-Community {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 30px;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  height: 100%; /* 부모 요소의 높이를 지정하여 수직 중앙 정렬이 가능하도록 합니다 */
+  width: 100%;
+  padding: 10px 10px;
 }
 
 .nav-at-Community .nav-Posts {
   background-color: #8A7968;
   color: white;
   padding: 12px 25px;
-  border-radius: 8px;
+  border-radius: 50px; /* 더 둥근 버튼 모양 */
   cursor: pointer;
   font-size: 18px;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase; /* 대문자로 변환 */
+  letter-spacing: 1px; /* 글자 간격 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+  width: 50%; /* 가로 꽉 채우기 */
+  max-width: 500px; /* 최대 너비를 설정하여 너무 넓어지지 않게 제한 */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center; /* 버튼 텍스트 중앙 정렬 */
 }
 
 .nav-at-Community .nav-Posts:hover {
-  background-color: #7b6c56;
+  background-color: #7b6c56; /* 호버 시 색상 */
+  transform: translateY(-2px); /* 약간 위로 올라가는 효과 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 그림자 강도 증가 */
 }
+
+.nav-at-Community .nav-Posts:active {
+  transform: translateY(2px); /* 클릭 시 약간 내려가는 효과 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 효과 감소 */
+} 
 
 /* 게시글 테이블 스타일 */
 .post-table {
@@ -238,7 +255,7 @@
   }
 
   .nav-at-Community .nav-Posts {
-    padding: 10px 20px;
+    padding: 10px 80px;
     font-size: 16px;
   }
 
@@ -325,4 +342,157 @@
 .AddPostsBack button:active {
   background-color: #4E463C; /* 클릭 시 더 어두운 색상 */
   transform: scale(0.95); /* 약간 축소 */
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.popup-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/*메시지 css 추가*/
+/* 전체 컨테이너 */
+.purchase-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.purchase-section h3 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.product-item:hover {
+  background-color: #f1f1f1;
+}
+
+.product-item span {
+  font-size: 16px;
+  color: #555;
+}
+
+.product-item button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #6D5F4D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-item button:hover {
+  background-color: #494034;
+}
+
+.points-display {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.points-display span {
+  font-size: 16px;
+  color: #333;
+}
+
+/* 작은 디바이스에서의 레이아웃 */
+@media (max-width: 600px) {
+  .purchase-section {
+    padding: 15px;
+  }
+
+  .product-item {
+    padding: 12px;
+  }
+
+  .product-item button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* 포인트 디스플레이 스타일 */
+.points-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.points-display span {
+  font-size: 16px;
+  color: #333;
+  margin: 0 10px;
+}
+
+.points-display .highlight {
+  font-weight: bold;
+  color: #6D5F4D; /* 강조된 부분은 초록색으로 */
+}
+
+/* 작은 화면에서의 스타일 */
+@media (max-width: 600px) {
+  .points-display {
+    padding: 8px;
+  }
+
+  .points-display span {
+    font-size: 14px;
+  }
 }
