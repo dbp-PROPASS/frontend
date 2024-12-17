@@ -11,12 +11,12 @@ import messagesByPrice from './messages';
 const Community = () => {
   const [view, setView] = useState('list'); // List/Write/Detail 상태 관리
   const [searchTerm, setSearchTerm] = useState(''); // 검색어
-  const [category, setCategory] = useState('it'); // 현재 선택된 카테고리
+  const [category, setCategory] = useState('business'); // 현재 선택된 카테고리
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
   const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
-  const [showPopup, setShowPopup] = useState(true); // 광고 팝업 상태
+  const [showPopup, setShowPopup] = useState(() => !localStorage.getItem('adPopupClosed')); // 광고 팝업 상태
   const [commentCount, setCommentCount] = useState(0);  // 댓글 개수 상태
   const [points, setPoints] = useState(0);  // 포인트 상태
   const [popupMessage, setPopupMessage] = useState(null); // 상품 구매 팝업 메시지 상태
@@ -97,27 +97,32 @@ const Community = () => {
             >
               지금 바로 이동
             </button>
-            <button onClick={() => setShowPopup(false)}>닫기</button>
+            <button
+              onClick={() => {
+                localStorage.setItem('adPopupClosed', 'true'); // Set the flag in localStorage
+                setShowPopup(false); // Hide the popup
+              }}
+            >
+              닫기
+            </button>
           </div>
         </div>
       </div>
     )
   );
 
-   // 페이지네이션 계산
-   const totalPages = Math.ceil(postsData.length / postsPerPage);
-   const paginatedPosts = postsData.slice(
-     (currentPage - 1) * postsPerPage,
-     currentPage * postsPerPage
-   );
+  // 페이지네이션 계산
+  const totalPages = Math.ceil(postsData.length / postsPerPage);
+  const paginatedPosts = postsData.slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  );
 
   // 상품 구매 핸들러
   const handlePurchase = (product) => {
     if (points >= product.price) {
       // 포인트 차감
       setPoints((prevPoints) => prevPoints - product.price);
-
-      
 
       // 랜덤 메시지 선택 (해당 가격의 메시지 중 하나)
       const randomMessage = messagesByPrice[product.price]?.[
@@ -131,44 +136,43 @@ const Community = () => {
     }
   };
 
-// 상품 구매 팝업 컴포넌트
-const PurchasePopup = ({ message, onClose }) => (
-  <div className="popup-overlay">
-    <div className="popup">
-      <h2>💯 오늘도 파이팅! 😄</h2>
-      <p>{message}</p>
-      <button onClick={onClose}>닫기</button>
+  // 상품 구매 팝업 컴포넌트
+  const PurchasePopup = ({ message, onClose }) => (
+    <div className="popup-overlay">
+      <div className="popup">
+        <h2>💯 오늘도 파이팅! 😄</h2>
+        <p>{message}</p>
+        <button onClick={onClose}>닫기</button>
+      </div>
     </div>
-  </div>
-);
+  );
 
-const closePopup = () => {
-  setIsPopupOpen(false); // 팝업창 닫기
-};
+  const closePopup = () => {
+    setIsPopupOpen(false); // 팝업창 닫기
+  };
 
-const renderPurchaseSection = () => (
-  <div className="purchase-section">
-    <h3>포인트 쇼핑</h3>
-    <ul className="product-list">
-      {[
-        { id: 1, name: "오늘의 운세", price: 5 },
-        { id: 2, name: "오늘의 공부법", price: 10 },
-        { id: 3, name: "인생의 꿀팁", price: 15 },
-      ].map((product) => (
-        <li key={product.id} className="product-item">
-          <span>{product.name}</span>
-          <span>{product.price} 포인트</span>
-          <button onClick={() => handlePurchase(product)}>구매하기</button>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
+  const renderPurchaseSection = () => (
+    <div className="purchase-section">
+      <h3>포인트 쇼핑</h3>
+      <ul className="product-list">
+        {[
+          { id: 1, name: "오늘의 운세", price: 5 },
+          { id: 2, name: "오늘의 공부법", price: 10 },
+          { id: 3, name: "인생의 꿀팁", price: 15 },
+        ].map((product) => (
+          <li key={product.id} className="product-item">
+            <span>{product.name}</span>
+            <span>{product.price} 포인트</span>
+            <button onClick={() => handlePurchase(product)}>구매하기</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   // 목록 화면 렌더링
   const renderListView = () => (
-    <div className="post-list-container"><br></br><br></br><br></br><br></br><br></br><br></br>
+    <div className="post-list-container"><br /><br /><br /><br /><br /><br />
       {renderAdPopup()} {/* 광고 팝업 조건부 렌더링 */}
 
       <div className="category-select">
@@ -180,16 +184,16 @@ const renderPurchaseSection = () => (
           }}
           className="category-dropdown"
         >
-          <option value="it">IT/컴퓨터 분야</option>
-          <option value="english">어학 분야</option>
-          <option value="finance">경영/회계/금융 분야</option>
-          <option value="tech">운전/기계 분야</option>
-          <option value="medical">의료/보건 분야</option>
-          <option value="edu">교육/상담 분야</option>
-          <option value="design">공예/디자인 분야</option>
-          <option value="food">조리/식음료 분야</option>
-          <option value="architect">건축/토목/기술 분야</option>
-          <option value="national">국가 자격증 분야</option>
+          <option value="business">경영·사무·금융 분야</option>
+          <option value="public">교육·법률·공공 분야</option>
+          <option value="health">보건·안전 분야</option>
+          <option value="culture">문화·여가·서비스 분야</option>
+          <option value="logistics">운전·운송·경비 분야</option>
+          <option value="industry">건설·기계·자원 분야</option>
+          <option value="manufacturing">화학·섬유·제조 분야</option>
+          <option value="technology">전기·전자·정보통신 분야</option>
+          <option value="food">식품·가공 분야</option>
+          <option value="environment">농림·환경·에너지 분야</option>
         </select>
 
         <input
@@ -205,11 +209,7 @@ const renderPurchaseSection = () => (
         <div className="nav-Posts" onClick={() => setView('write')}>
           글 작성
         </div>
-
-        
       </div>
-
-      
 
       <table className="post-table">
         <thead>
@@ -250,11 +250,10 @@ const renderPurchaseSection = () => (
         ))}
       </div>
 
-      
       {renderPurchaseSection()} {/* 상품 구매 섹션 */}
       <div className="points-display">
-          <span>내 포인트: {points}</span>
-          <span> (댓글 1개당 1포인트)</span>
+        <span>내 포인트: {points}</span>
+        <span> (댓글 1개당 1포인트)</span>
       </div>
       <LargeAdBanner />
 
@@ -275,9 +274,6 @@ const renderPurchaseSection = () => (
       alert('로그인 정보가 없습니다.'); // 쿠키에 이메일이 없으면 알림
       return;
     }
-    // // formData에 author 추가
-    // const authorData = { author };
-    // const postData = { ...formData, author };
 
     try {
       const response = await axios.post(`http://localhost:5000/api/posts/${selectedPost.postId}/comments`, {
@@ -303,7 +299,7 @@ const renderPurchaseSection = () => (
   };
 
   const renderDetailView = () => (
-    <div className="post-detail"><br></br><br></br><br></br>
+    <div className="post-detail"><br /><br /><br />
       {/* 기존 상세보기 UI */}
       <h2 className="post-title">{selectedPost.title}</h2>
       <p className="post-author"><strong></strong> {selectedPost.author}</p>
@@ -330,40 +326,39 @@ const renderPurchaseSection = () => (
           />
           <button onClick={handleCommentSubmit}>댓글 작성</button>
         </div>
-
-        
       </div>
 
       <button
         onClick={() => {
           setView('list'); // 상태를 먼저 변경
-          window.location.reload(); // 새로고침 실행
+          window.location.reload(); // 페이지 새로고침
         }}
       >
         목록으로
       </button>
+
 
       <LargeAdBanner />
     </div>
   );
 
   const categoryMap = {
-    it: '2',
-    english: '3',
-    finance: '4',
-    tech: '5',
-    medical: '6',
-    edu: '7',
-    design: '8',
-    food: '9',
-    architect: '10',
-    national: '11',
+    business: '2',
+    public: '3',
+    health: '4',
+    culture: '5',
+    logistics: '6',
+    industry: '7',
+    manufacturing: '8',
+    technology: '9',
+    food: '10',
+    environment: '11',
   };
 
   return view === 'list'
     ? renderListView()
     : view === 'write'
-    ? <AddPosts currentCategory={categoryMap[category]}  setView={setView} />
+    ? <AddPosts currentCategory={categoryMap[category]} setView={setView} />
     : view === 'detail'
     ? renderDetailView()
     : null;
