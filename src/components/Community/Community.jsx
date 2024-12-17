@@ -16,7 +16,7 @@ const Community = () => {
   const [postsData, setPostsData] = useState([]); // API에서 가져온 데이터
   const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시글
   const [newComment, setNewComment] = useState(''); // 댓글 입력내용 저장
-  const [showPopup, setShowPopup] = useState(() => !localStorage.getItem('adPopupClosed')); // 광고 팝업 상태
+  const [showPopup, setShowPopup] = useState(false);
   const [commentCount, setCommentCount] = useState(0);  // 댓글 개수 상태
   const [points, setPoints] = useState(0);  // 포인트 상태
   const [popupMessage, setPopupMessage] = useState(null); // 상품 구매 팝업 메시지 상태
@@ -24,6 +24,8 @@ const Community = () => {
 
   const postsPerPage = 8; // 페이지당 게시글 수
   const navigate = useNavigate();
+
+  
 
   useEffect(() => {
     const sessionToken = Cookies.get('rememberEmail'); // 쿠키에서 토큰 가져오기
@@ -33,6 +35,21 @@ const Community = () => {
       navigate('/login'); // 로그인 페이지로 이동
     }
   }, [navigate]);
+
+  useEffect(() => {
+    const adPopupClosed = localStorage.getItem('adPopupClosed');
+    
+    if (adPopupClosed !== 'true') {
+      setShowPopup(true);   // 광고 팝업을 처음에만 보이도록 설정
+    } else {
+      setShowPopup(true); // 닫지 않았다면 팝업을 보이게 설정
+    }
+  }, []); // 컴포넌트 마운트 시 한번만 실행
+
+  const handleAdClose = () => {
+    localStorage.setItem('adPopupClosed', 'true'); // 팝업 닫은 상태 저장
+    setShowPopup(false); // 팝업 닫기
+  };
 
   useEffect(() => {
     const fetchCommentCount = async () => {
@@ -79,10 +96,11 @@ const Community = () => {
   }, [category]); // 카테고리 변경 시 API 호출
 
   // 광고 팝업 렌더링 함수
-  const renderAdPopup = () => (
-    showPopup && (
-      <div className="popup-overlay">
-        <div className="popup">
+  const renderAdPopup = () => {
+    return (
+      showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
           <h2>광고</h2>
           <p>
             토익1타 방학강좌 수강료 최대 35% 지원
@@ -96,20 +114,19 @@ const Community = () => {
               onClick={() => window.open('https://www.hackers.co.kr/', '_blank')}
             >
               지금 바로 이동
-            </button>
+              </button>
             <button
               onClick={() => {
-                localStorage.setItem('adPopupClosed', 'true'); // Set the flag in localStorage
-                setShowPopup(false); // Hide the popup
+                localStorage.setItem('adPopupClosed', 'true'); // 광고 닫은 상태 저장
+                setShowPopup(false); // 팝업 닫기
               }}
-            >
-              닫기
-            </button>
+            >닫기</button>
+            </div>
           </div>
         </div>
-      </div>
-    )
-  );
+      )
+    );
+  };
 
   // 페이지네이션 계산
   const totalPages = Math.ceil(postsData.length / postsPerPage);
