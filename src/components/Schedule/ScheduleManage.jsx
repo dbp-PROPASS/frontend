@@ -96,7 +96,7 @@ const ScheduleManage = () => {
   // 특정 날짜에 해당하는 이벤트를 필터링하는 함수
   const getEventsForDate = (date) => {
   return calendarData
-    .filter(event => event.date === date)
+    .filter(event => event.date === date && event.date !== null && event.date !== undefined)
     .map(event => {
       let description;
 
@@ -129,10 +129,17 @@ const ScheduleManage = () => {
             </>
           );
           break;
-        case 'writtenExam':
+        case 'writtenExamStart':
           description = (
             <>
-              {event.certName} <br /> 필기 시험일
+              {event.certName} <br /> 필기 시험 시작일
+            </>
+          );
+          break;
+        case 'writtenExamEnd':
+          description = (
+            <>
+              {event.certName} <br /> 필기 시험 종료일
             </>
           );
           break;
@@ -157,10 +164,17 @@ const ScheduleManage = () => {
             </>
           );
           break;
-        case 'practicalExam':
+        case 'practicalExamStart':
           description = (
             <>
-              {event.certName} <br /> 실기 시험일
+              {event.certName} <br /> 실기 시험 시작일
+            </>
+          );
+          break;
+        case 'practicalExamEnd':
+          description = (
+            <>
+              {event.certName} <br /> 실기 시험 종료일
             </>
           );
           break;

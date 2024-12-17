@@ -176,13 +176,15 @@
   --marker-writtenReceiveStart: #D1E8FF;
   --marker-writtenReceiveEnd: #FFA5A5;
   --marker-writtenResults: #FFD69A;
-  --marker-writtenExam: #A5FFBA;
+  --marker-writtenExamStart: #A5FFBA;
+  --marker-writtenExamEnd: #A5FFBA;
 
   /* 실기 이벤트 색상 */
-  --marker-practicalReceiveStart: #C7D3FF;
-  --marker-practicalReceiveEnd: #FFA7A7;
-  --marker-practicalResults: #FFF5A3;
-  --marker-practicalExam: #A3FFCE;
+  --marker-practicalReceiveStart: #D1E8FF;
+  --marker-practicalReceiveEnd: #FFA5A5;
+  --marker-practicalResults: #FFD69A;
+  --marker-practicalExamStart: #A5FFBA;
+  --marker-practicalExamEnd: #A5FFBA;
 }
 
 
