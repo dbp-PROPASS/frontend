@@ -138,6 +138,9 @@
   margin-top: 10px;
 }
 
+td {
+  position: relative; /* 자식 요소들이 상대적으로 배치될 기준을 설정 */
+}
 /* 이미지 컨테이너 */
 .img {
   width: 70%; /* 원하는 크기 */
@@ -146,6 +149,12 @@
   border-radius: 10px; /* 둥근 모서리 */
   background-color: rgba(210, 201, 201, 0.5); /* 50% 투명도 */
   padding: 15px;
+  
+  position: absolute;  /* td 기준으로 절대 위치 */
+  top: 50px;  /* td의 상단에 배치 */
+  left: 50%;  /* td의 중앙에 배치 */
+  transform: translateX(-50%); /* 정확히 중앙 정렬 */
+  z-index: 10; /* 다른 요소들 위에 오도록 설정 */
 }
 
 .img img {
@@ -158,6 +167,7 @@
   text-align: center;
   font-size: 14px;
   color: #333;
+
 }
 
 .img:hover .img-description {
@@ -177,6 +187,13 @@
   padding: 10px;
   white-space: nowrap !important;
   border-radius: 10px;
+
+  
+  position: absolute;  /* td 기준으로 절대 위치 */
+  top: 310px;  /* td의 상단에 배치 */
+  left: 20%;  /* td의 중앙에 배치 */
+  transform: translateX(-50%); /* 정확히 중앙 정렬 */
+  z-index: 10; /* 다른 요소들 위에 오도록 설정 */
 }
 
 .bookmarked {
@@ -185,8 +202,6 @@
   font-weight: bold;
   background-color: rgba(140, 124, 108, 0.5); /* 배경색에 투명도 50% 적용 */
 }
-
-
 
 .img-description {
   margin-top: 5px;

@@ -4,6 +4,8 @@ import '../../styles/Certinfo/CertificateInfo.css';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import certificationLinks from '../../data/certificationLinks.json';
+
 
 const CertificateInfo = () => {
   const { certName } = useParams();
@@ -161,15 +163,22 @@ const CertificateInfo = () => {
           <tr>
             <td rowSpan="3">
               <a
-                href="https://www.naver.com"
+                href={certificationLinks[allRounds[0].CERT_ORG]}
                 target="_blank"
                 className="img-link"
                 rel="noopener noreferrer"
               >
                 <div className="img">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/512/5435/5435077.png"
+                    onLoad={() => {
+                      console.log('CERT_ORG:', allRounds[0]?.CERT_ORG);
+                    }}
+                    src={`/image/${allRounds[0]?.CERT_ORG}.png`}
                     alt="description"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://cdn-icons-png.flaticon.com/512/5435/5435077.png'; // 기본 이미지
+                    }}
                   />
                   <p className="img-description">▲ 사이트 바로가기</p>
                 </div>
@@ -203,7 +212,17 @@ const CertificateInfo = () => {
                           {round.RECEPTION_START_DATE || '정보 없음'} ~{' '}
                           {round.RECEPTION_FINISH_DATE || '정보 없음'}
                         </td>
-                        <td>{round.EXAM_DATE || '정보 없음'}</td>
+                        <td>
+                          {round.EXAM_START_DATE ? (
+                            round.EXAM_END_DATE ? (
+                              `${round.EXAM_START_DATE} ~ ${round.EXAM_END_DATE}`
+                            ) : (
+                              round.EXAM_START_DATE
+                            )
+                          ) : (
+                            '정보 없음'
+                          )}
+                        </td>
                         <td>{round.RESULT_DATE || '정보 없음'}</td>
                       </tr>
                     ))
@@ -220,8 +239,8 @@ const CertificateInfo = () => {
             <td className="exam-fee">
               <h3>응시료</h3>
               <ul>
-                <li>필기 : {allRounds[0]?.WRITTEN_FEE   || '-'} 원</li>
-                <li>실기 : {allRounds[0]?.PRACTICAL_FEE  || '-'} 원</li>
+                <li>필기 : {allRounds[0]?.WRITTEN_FEE   || '-'}</li>
+                <li>실기 : {allRounds[0]?.PRACTICAL_FEE  || '-'}</li>
               </ul>
             </td>
           </tr>
@@ -229,8 +248,8 @@ const CertificateInfo = () => {
             <td className="examgood">
               <h3>합격률</h3>
               <ul>
-                <li>필기 : {allRounds[0]?.WRITTEN_PASS_RATE || '-'}%</li>
-                <li>실기 : {allRounds[0]?.PRACTICAL_PASS_RATE || '-'}%</li>
+                <li>필기 : {allRounds[0]?.WRITTEN_PASS_RATE || '-'}</li>
+                <li>실기 : {allRounds[0]?.PRACTICAL_PASS_RATE || '-'}</li>
               </ul>
             </td>
           </tr>
