@@ -1,58 +1,68 @@
-/* 전체 스케줄 컨테이너 */
+/* 공통 스타일: 컨테이너 */
 .schedule-container {
-  padding-top: 100px; /* 컨테이너 상단 여백을 100px로 설정 */
+  padding-top: 100px; /* 상단 여백 */
   padding-left: 3%;
   padding-right: 3%;
-  display: flex; /* 캘린더와 세부 일정 리스트를 수평으로 배치 */
-  justify-content: space-between;
-  gap: 20px; /* 캘린더와 세부 일정 리스트 간의 간격 설정 */
-  font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+  display: flex; /* 수평 배치 */
+  justify-content: space-between; /* 요소 간 공간 균등 분배 */
+  font-family: Arial, sans-serif; /* 기본 폰트 */
   color: #8A7968;
+  height: 100vh; /* 화면 높이에 맞춤 */
+  width: 100%; /* 화면 너비에 맞춤 */
+  box-sizing: border-box; /* 패딩과 테두리 포함 */
+  flex-wrap: wrap; /* 화면이 좁을 경우 요소를 아래로 배치 */
+  gap: 2%;
 }
 
 /* 캘린더 섹션 */
 .calendar {
-  width: 58%; /* 캘린더의 가로폭을 컨테이너의 60%로 설정 */
+  flex: 1; /* 비율에 따라 크기 조정 */
+  min-width: 300px; /* 최소 너비 설정 */
+  max-width: 60%; /* 최대 너비 설정 */
   height: 100%;
-  overflow: hidden; /* 내용이 넘칠 경우 스크롤을 숨김 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* 캘린더 상단 네비게이션 (이전/다음 버튼 및 월/년도 표시) */
 .calendar-header {
-  height: 8%;
-  font-size: 30px;
+  font-size: 1.5em; 
   font-weight: bold;
   display: flex; /* 버튼과 텍스트를 가로로 배치 */
   justify-content: space-between; /* 버튼과 텍스트를 양쪽 끝으로 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
-  margin-bottom: 10px; /* 아래쪽 여백 설정 */
+  margin-bottom: 1%; /* 아래쪽 여백 설정 */
 }
 
 /* 캘린더 테이블 */
 .calendar table {
+  table-layout: fixed; /* 셀 크기 고정 */
   width: 100%; /* 테이블이 캘린더 영역을 꽉 채우도록 설정 */
-  height: 100%;
+  height: 90%;
   border-collapse: collapse; /* 테두리 겹침 방지 */
-  table-layout: fixed; /* 셀 너비를 일정하게 유지 */
   border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
 }
 
 /* 요일 헤더 스타일 */
 .calendar th {
   background-color: #e5d1be; /* 요일 헤더의 배경색 설정 */
-  padding: 8px; /* 요일 헤더의 내부 여백 설정 */
-  text-align: center; /* 텍스트를 중앙 정렬 */
-  border: 2px solid #8A7968; /* 셀 테두리 색상 및 두께 설정 */
+  text-align: center;
+  border: 1px solid #8A7968;
+  vertical-align: middle; /* 텍스트 상단 정렬 */
+  padding: 1%; /* 상대적인 패딩 */
+  font-size: 0.9em; /* 반응형 폰트 크기 */
 }
 
 /* 날짜 셀 스타일 */
 .calendar td {
-  padding: 3px 8px;
-  text-align: left; /* 텍스트를 왼쪽 정렬 */
-  border: 2px solid #8A7968; /* 셀 테두리 설정 */
-  cursor: pointer; /* 마우스 오버 시 포인터 커서 표시 */
-  position: relative; /* 날짜 번호 및 이벤트를 위치시킬 기준을 설정 */
-  vertical-align: top; /* 텍스트를 상단 정렬 */
+  height: 120px;
+  text-align: center;
+  border: 1px solid #8A7968;
+  vertical-align: top; /* 텍스트 상단 정렬 */
+  padding: 0.6rem; /* 상대적인 패딩 */
+  position: relative;
+  font-size: 0.9em; /* 반응형 폰트 크기 */
 }
 
 /* 이벤트가 있는 날짜의 스타일 */
@@ -69,16 +79,17 @@
 
 /* 날짜 표시 스타일 */
 .day-number {
-  position: absolute; /* 날짜를 셀 내의 특정 위치에 고정 */
-  top: 7%; /* 셀 상단에서 5px 떨어진 위치에 배치 */
-  right: 7%; /* 셀 오른쪽에서 5px 떨어진 위치에 배치 */
-  font-weight: bold; /* 날짜 텍스트를 볼드 처리 */
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 
 /* 이벤트 마커 컨테이너 스타일 */
 .event-markers {
-  margin-top: 30px; /* 날짜와 이벤트 리스트 사이의 간격 */
-  height: 90px; /* 이벤트 리스트의 최대 높이 */
+  margin-top: 10%; /* 날짜와 이벤트 리스트 사이의 간격 */
+  max-height: 70%; /* 최대 높이 제한 */
   overflow-y: auto; /* 이벤트가 많을 경우 수직 스크롤 표시 */
   display: flex; /* 이벤트 마커를 수직으로 나열 */
   flex-direction: column; /* 수직 정렬 */
@@ -101,35 +112,37 @@
   font-weight: bold; /* 폰트 두께 */
 }
 
-/* 오른쪽 일정 세부사항 컨테이너 */
+/* 일정 세부사항 */
 .schedule-details {
-  margin-top: 10px;
-  margin-left: 1%;
-  width: 36%; /* 오른쪽 패널의 폭을 전체의 36%로 설정 */
-  height: 100%;
-  border-radius: 30px; /* 둥근 모서리 */
+  flex: 1; /* 비율에 따라 크기 조정 */
+  min-width: 300px; /* 최소 너비 설정 */
+  max-width: 40%; /* 최대 너비 설정 */
+  height: 88vh;
+  border-radius: 20px;
   color: white;
   text-align: center;
+  box-sizing: border-box;
+  gap:20px;
 }
 
 .detailBox {
-  background-color: #8A7968; /*배경색 설정*/
-  padding: 12px; /* 내부 여백 */
-  border-radius: 30px; /* 둥근 모서리 */
-  border: 2px solid #8A7968; /* 테두리 설정 */
+  height: 71vh; /* 자동 높이 조정 */
+  background-color: #8A7968;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #8A7968;
 }
 
 .detailBox2 {
-  padding-top: 1%;
-  padding-left: 1%;
-  padding-right: 6%;
-  height: 530px;
-  background-color: white; /* 배경색 설정 */
-  border-radius: 25px; /* 둥근 모서리 */
+  padding: 10px;
+  height: calc(70vh - 90px);
+  background-color: white;
+  border-radius: 20px;
+  overflow-y: auto; /* 스크롤 허용 */
 }
 
 .event-box-detail {
-  padding: 4px 8px; /* 이벤트 박스 내부 여백 */
+  padding: 1%; /* 이벤트 박스 내부 여백 */
   border-radius: 20px; /* 둥근 모서리 */
   color: black; /* 텍스트 색상 */
   font-weight: bold;
@@ -160,28 +173,24 @@
 
 .schedule-details button{
   margin-top: 15px; /* 버튼 위쪽 여백 */
-  padding: 12px 22px; /* 버튼 내부 여백 */
+  padding: 3% 5%; /* 버튼 내부 여백 */
   border-radius: 15px; /* 버튼 모서리 둥글게 */
 }
 
 /* 일정 색상 */
 :root {
-  --marker-receiveStart: #9AC8FF;
-  --marker-receiveEnd: #FF9A9A;
-  --marker-exam: #9AFFD5;
-  --marker-results: #FFFB9A;
   --marker-expired: #FFBF9A;
 
   /* 필기 이벤트 색상 */
   --marker-writtenReceiveStart: #D1E8FF;
-  --marker-writtenReceiveEnd: #FFA5A5;
+  --marker-writtenReceiveEnd: #D1E8FF;
   --marker-writtenResults: #FFD69A;
   --marker-writtenExamStart: #A5FFBA;
   --marker-writtenExamEnd: #A5FFBA;
 
   /* 실기 이벤트 색상 */
   --marker-practicalReceiveStart: #D1E8FF;
-  --marker-practicalReceiveEnd: #FFA5A5;
+  --marker-practicalReceiveEnd: #D1E8FF;
   --marker-practicalResults: #FFD69A;
   --marker-practicalExamStart: #A5FFBA;
   --marker-practicalExamEnd: #A5FFBA;
@@ -192,11 +201,14 @@
 .event-legend {
   padding-left: 4%;
   display: flex;
+  flex-wrap: wrap; /* 작은 화면에서는 줄바꿈 허용 */
   justify-content: center;
+  align-items: center; /* 세로 정렬 */
   margin-bottom: 20px;
-  gap: 15px;
+  gap: 10px; /* 항목 간 간격 */
   color: #8a7968;
   white-space: nowrap;
+  font-size: 0.9rem; /* 상대적인 폰트 크기 */
 }
 
 .legend-item {
