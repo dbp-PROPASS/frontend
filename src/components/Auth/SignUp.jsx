@@ -130,13 +130,13 @@ const SignUp = () => {
           <div className="signUpField">
             <p>전화번호</p>
             <p> | </p>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="ex) 010-xxxx-xxxx"/>
+            <input type="text" name="phone" value={formData.phone} onChange={handleChange} required placeholder="ex) 010-xxxx-xxxx"/>
             <button type="button">인증 받기</button>
           </div>
           <div className="signUpField">
             <p>연령대</p>
             <p> | </p>
-            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange} placeholder="ex) 22세 → 20"/>
+            <input type="text" name="age_group" value={formData.age_group} onChange={handleChange} required placeholder="ex) 22세 → 20"/>
           </div>
           <div className="signUpField">
             <p>관심분야</p>

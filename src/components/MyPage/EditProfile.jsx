@@ -113,7 +113,7 @@ const EditProfile = () => {
               type="text"
               name="name"
               value={formData.name}
-              onChange={handleChange}
+              onChange={handleChange} required
               placeholder="이름을 입력하세요"
             />
           </div>
@@ -124,7 +124,7 @@ const EditProfile = () => {
               type="password"
               name="password"
               value={formData.password}
-              onChange={handleChange}
+              onChange={handleChange} required
               placeholder="새 비밀번호를 입력하세요"
             />
           </div>
@@ -146,7 +146,7 @@ const EditProfile = () => {
               type="text"
               name="phone"
               value={formData.phone}
-              onChange={handleChange}
+              onChange={handleChange} required
               placeholder="ex) 010-xxxx-xxxx"
             />
           </div>
@@ -157,7 +157,7 @@ const EditProfile = () => {
               type="text"
               name="age_group"
               value={formData.age_group}
-              onChange={handleChange}
+              onChange={handleChange} required
              placeholder="ex) 22세 → 20"
             />
           </div>
