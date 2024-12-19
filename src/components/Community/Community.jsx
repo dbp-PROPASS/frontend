@@ -57,7 +57,7 @@ const Community = () => {
         const author = Cookies.get('rememberEmail');  // 로그인한 사용자의 이메일
 
         if (!author) {
-          alert('로그인 정보가 없습니다.');
+          //alert('로그인 정보가 없습니다.');
           navigate('/login');
           return;
         }
